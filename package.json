@@ -24,10 +24,16 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@portabletext/react": "^3.0.9",
+    "@sanity/image-url": "1",
+    "@sanity/vision": "3",
     "clsx": "^2.0.0",
     "next": "13.4.13-canary.15",
+    "next-sanity": "5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sanity": "3",
+    "styled-components": "5.2"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
