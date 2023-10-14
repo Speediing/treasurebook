@@ -41,7 +41,7 @@ export default async function Navbar() {
             </ul>
           ) : null} */}
         </div>
-        <div className="flex flex-row justify-center gap-2 md:flex md:w-1/3">
+        <div className="flex flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (
             <div key={item.title}>
               <Link

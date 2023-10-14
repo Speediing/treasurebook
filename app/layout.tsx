@@ -41,7 +41,7 @@ const inter = Inter({
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 ">
+      <body className="bg-white text-black selection:bg-teal-300 ">
         <Navbar />
         <Suspense>
           <main>{children}</main>
