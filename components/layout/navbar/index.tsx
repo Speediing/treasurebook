@@ -13,7 +13,7 @@ export default async function Navbar() {
   const nav = await client.fetch(`*[_type == "headerNavigation"]`);
   const navData = nav[0];
   const logoUrl = urlForImage(navData.logo.asset._ref).url();
-  const navOptions = navData.napOptions.map((x) => {
+  const navOptions = navData.napOptions.map((x: any) => {
     return { title: x.name, path: x.path.current };
   });
   return (
@@ -42,7 +42,7 @@ export default async function Navbar() {
           ) : null} */}
         </div>
         <div className="flex flex-row justify-center gap-2 md:flex md:w-1/3">
-          {navOptions.map((item) => (
+          {navOptions.map((item: any) => (
             <div key={item.title}>
               <Link
                 href={item.path}
