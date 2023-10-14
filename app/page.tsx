@@ -22,7 +22,7 @@ const FullWidthImage = ({ imageUrl }: { imageUrl: string }) => {
           src={imageUrl}
           height="500"
           width={'1000'}
-          className={'h-full max-h-[40rem] w-full'}
+          className={'h-full max-h-[40rem] w-full object-cover'}
           objectFit={'cover'}
         />
       </div>
