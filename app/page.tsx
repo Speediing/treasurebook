@@ -21,6 +21,30 @@ const FullWidthImage = ({ imageUrl }: { imageUrl: string }) => {
   }
 };
 
+const SplitSmallText = ({
+  leftOptions,
+  rightOptions
+}: {
+  leftOptions: string[];
+  rightOptions: string[];
+}) => {
+  return (
+    <div className="flex w-full flex-row justify-between px-16 pt-28 text-xs">
+      <div className="flex flex-col">
+        {leftOptions.map((x) => (
+          <div key={x}>{x}</div>
+        ))}
+      </div>
+      <div className="flex flex-col">
+        {' '}
+        {rightOptions.map((x) => (
+          <div key={x}>{x}</div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default async function HomePage() {
   const content = await client.fetch(`*[_type == "page" && slug.current == "/"]`);
   const pageContent = content[0].pageBuilder;
@@ -30,7 +54,9 @@ export default async function HomePage() {
         console.log(x);
         switch (x._type) {
           case 'fullWidthImage':
-            return <FullWidthImage imageUrl={urlForImage(x.images.asset._ref).url()} />;
+            return <FullWidthImage imageUrl={urlForImage(x.image.asset._ref).url()} />;
+          case 'splitSmallText':
+            return <SplitSmallText leftOptions={x.leftItems} rightOptions={x.rightItems} />;
           default:
             break;
         }

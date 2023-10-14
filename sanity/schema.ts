@@ -6,7 +6,8 @@ import navOption from './schemas/navOption';
 import page from './schemas/page';
 
 import fullWidthImage from './schemas/fullWidthImage';
+import splitSmallText from './schemas/splitSmallText';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [page, headerNavigation, footerNavigation, navOption, fullWidthImage]
+  types: [page, headerNavigation, footerNavigation, navOption, fullWidthImage, splitSmallText]
 };

@@ -23,6 +23,10 @@ export default defineType({
         defineArrayMember({
           name: 'fullWidthImage',
           type: 'fullWidthImage'
+        }),
+        defineArrayMember({
+          name: 'splitSmallText',
+          type: 'splitSmallText'
         })
       ]
     })
