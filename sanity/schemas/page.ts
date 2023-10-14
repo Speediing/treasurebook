@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'page',
@@ -9,6 +9,22 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string'
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug'
+    }),
+    defineField({
+      name: 'pageBuilder',
+      type: 'array',
+      title: 'Page builder',
+      of: [
+        defineArrayMember({
+          name: 'fullWidthImage',
+          type: 'fullWidthImage'
+        })
+      ]
     })
   ]
 });

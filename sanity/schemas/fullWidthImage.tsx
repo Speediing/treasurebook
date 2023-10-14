@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-  name: 'category',
-  title: 'Category',
+  name: 'fullWidthImage',
+  title: 'Full Width Image',
   type: 'document',
   fields: [
     defineField({
@@ -10,10 +10,11 @@ export default defineType({
       title: 'Title',
       type: 'string'
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text'
-    })
+
+    {
+      title: 'Image',
+      name: 'image',
+      type: 'image'
+    }
   ]
 });
