@@ -14,6 +14,11 @@ module.exports = {
         protocol: 'https',
         hostname: 'cdn.shopify.com',
         pathname: '/s/files/**'
+      },
+      {
+        hostname: 'cdn.sanity.io',
+        protocol: 'https',
+        pathname: '/**'
       }
     ]
   },
