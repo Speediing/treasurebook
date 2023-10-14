@@ -11,6 +11,7 @@ specifiers:
   '@types/node': 20.4.4
   '@types/react': 18.2.16
   '@types/react-dom': 18.2.7
+  '@vercel/analytics': ^1.1.1
   '@vercel/git-hooks': ^1.0.0
   autoprefixer: ^10.4.14
   clsx: ^2.0.0
@@ -37,6 +38,7 @@ dependencies:
   '@portabletext/react': 3.0.9_react@18.2.0
   '@sanity/image-url': 1.0.2
   '@sanity/vision': 3.17.0_wlbqgtd3hsquwwfqazg47kay4q
+  '@vercel/analytics': 1.1.1
   clsx: 2.0.0
   next: 13.5.4_biqbaboplfbrettd7655fr4n2y
   next-sanity: 5.5.5_c27lfs4j7otbv76udizaavib5e
@@ -1816,6 +1818,12 @@ packages:
       codemirror: 6.0.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@vercel/analytics/1.1.1:
+    resolution: {integrity: sha512-+NqgNmSabg3IFfxYhrWCfB/H+RCUOCR5ExRudNG2+pcRehq628DJB5e1u1xqwpLtn4pAYii4D98w7kofORAGQA==}
+    dependencies:
+      server-only: 0.0.1
     dev: false
 
   /@vercel/git-hooks/1.0.0:
@@ -5804,6 +5812,10 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+
+  /server-only/0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
+    dev: false
 
   /set-function-name/2.0.1:
     resolution: {integrity: sha512-tMNCiqYVkXIZgc2Hnoy2IvC/f8ezc5koaRFkCjrpWzGpCd3qbZXPzVy9MAZzK1ch/X0jvSkojys3oqJN0qCmdA==}

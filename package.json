@@ -27,6 +27,7 @@
     "@portabletext/react": "^3.0.9",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "3",
+    "@vercel/analytics": "^1.1.1",
     "clsx": "^2.0.0",
     "next": "latest",
     "next-sanity": "5",
