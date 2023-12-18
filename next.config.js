@@ -4,9 +4,7 @@ module.exports = {
     // Disabling on production builds because we're running checks on PRs via GitHub Actions.
     ignoreDuringBuilds: true
   },
-  experimental: {
-    serverActions: true
-  },
+  experimental: {},
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
