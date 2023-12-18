@@ -32,7 +32,7 @@ export default async function Footer() {
   );
 }
 
-function InstagramIcon(props) {
+function InstagramIcon(props: any) {
   return (
     <svg
       {...props}
@@ -53,7 +53,7 @@ function InstagramIcon(props) {
   );
 }
 
-function PinIcon(props) {
+function PinIcon(props: any) {
   return (
     <svg
       {...props}
@@ -73,7 +73,7 @@ function PinIcon(props) {
   );
 }
 
-function YoutubeIcon(props) {
+function YoutubeIcon(props: any) {
   return (
     <svg
       {...props}
