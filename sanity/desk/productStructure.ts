@@ -1,6 +1,7 @@
+import { InfoOutlineIcon } from '@sanity/icons';
+// @ts-ignore
 import { ListItemBuilder } from 'sanity/desk';
 import defineStructure from '../utils/defineStructure';
-import { InfoOutlineIcon } from '@sanity/icons';
 
 export default defineStructure<ListItemBuilder>((S) =>
   S.listItem()

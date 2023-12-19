@@ -1,4 +1,5 @@
 import { ConfigContext } from 'sanity';
+// @ts-ignore
 import { StructureBuilder } from 'sanity/desk';
 
 /**

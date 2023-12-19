@@ -1,3 +1,4 @@
+// @ts-ignore
 import { ListItemBuilder } from 'sanity/desk';
 import defineStructure from '../utils/defineStructure';
 

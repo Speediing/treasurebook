@@ -1,6 +1,7 @@
 /**
  * Desk structure overrides
  */
+// @ts-ignore
 import { ListItemBuilder, StructureResolver } from 'sanity/desk';
 import collections from './collectionStructure';
 import colorThemes from './colorThemeStructure';
