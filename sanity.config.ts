@@ -30,6 +30,7 @@ import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array';
 import { media, mediaAssetSource } from 'sanity-plugin-media';
+// @ts-ignore
 import { deskTool } from 'sanity/desk';
 import { structure } from './sanity/desk';
 import { dataset, projectId } from './sanity/env';
