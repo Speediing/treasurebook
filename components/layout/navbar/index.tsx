@@ -54,7 +54,9 @@ export default async function Navbar() {
           ))}
         </div>
         <div className="flex justify-end gap-4 md:w-1/3">
-          <Search />
+          <Suspense fallback={<OpenCart />}>
+            <Search />
+          </Suspense>
           <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>
