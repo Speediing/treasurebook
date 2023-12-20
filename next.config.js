@@ -5,7 +5,7 @@ module.exports = {
     ignoreDuringBuilds: true
   },
   experimental: {
-    ppr: true
+    // ppr: true
   },
   images: {
     formats: ['image/avif', 'image/webp'],

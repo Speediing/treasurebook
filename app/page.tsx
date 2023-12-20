@@ -64,7 +64,6 @@ export default async function HomePage() {
   return (
     <>
       {pageContent.map((x: any) => {
-        console.log(x);
         switch (x._type) {
           case 'fullWidthImage':
             return <FullWidthImage imageUrl={urlForImage(x.image.asset._ref).url()} />;

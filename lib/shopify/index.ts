@@ -403,6 +403,9 @@ export async function getProducts({
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
+  console.log(query);
+  console.log(reverse);
+  console.log(sortKey);
   const res = await shopifyFetch<ShopifyProductsOperation>({
     query: getProductsQuery,
     tags: [TAGS.products],
@@ -412,7 +415,7 @@ export async function getProducts({
       sortKey
     }
   });
-
+  console.log(reshapeProducts(removeEdgesAndNodes(res.body.data.products)));
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 

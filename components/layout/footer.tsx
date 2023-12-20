@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 
-export default async function Footer() {
+export default function Footer() {
   return (
     <footer className="py-y my-9 border-t border-gray-300 bg-white p-4 sm:p-6">
       <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-2">
