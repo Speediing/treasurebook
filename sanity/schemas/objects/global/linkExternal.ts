@@ -37,7 +37,7 @@ export default defineField({
     prepare(selection) {
       const { title, url } = selection;
 
-      const subtitle = [];
+      const subtitle: any = [];
       if (url) {
         subtitle.push(`→ ${url}`);
       }

@@ -45,7 +45,7 @@ export default defineField({
         title
       } = selection;
 
-      const subtitle = [];
+      const subtitle: any = [];
       if (reference) {
         subtitle.push([`→ ${referenceTitle || referenceProductTitle || reference?._id}`]);
         if (referenceType === 'product' && referenceProductPriceRange) {

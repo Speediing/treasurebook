@@ -4,8 +4,6 @@ import { Suspense } from 'react';
 import { client } from '../sanity/lib/client';
 import { urlForImage } from '../sanity/lib/image';
 
-export const runtime = 'edge';
-
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
   openGraph: {

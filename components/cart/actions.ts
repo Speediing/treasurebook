@@ -4,7 +4,7 @@ import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/
 import { cookies } from 'next/headers';
 
 export const addItem = async (variantId: string | undefined): Promise<String | undefined> => {
-  let cartId = cookies().get('cartId')?.value;
+  let cartId = cookies().get('cartId')?.value || '';
   let cart;
 
   if (cartId) {

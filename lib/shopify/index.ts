@@ -144,7 +144,7 @@ const reshapeCollection = (collection: ShopifyCollection): Collection | undefine
 };
 
 const reshapeCollections = (collections: ShopifyCollection[]) => {
-  const reshapedCollections = [];
+  const reshapedCollections: any = [];
 
   for (const collection of collections) {
     if (collection) {
@@ -186,7 +186,7 @@ const reshapeProduct = (product: ShopifyProduct, filterHiddenProducts: boolean =
 };
 
 const reshapeProducts = (products: ShopifyProduct[]) => {
-  const reshapedProducts = [];
+  const reshapedProducts: any = [];
 
   for (const product of products) {
     if (product) {
