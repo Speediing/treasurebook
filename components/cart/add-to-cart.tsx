@@ -1,6 +1,7 @@
 'use client';
 
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
+import { PlusIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import { addItem } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
@@ -32,7 +33,8 @@ export function AddToCart({
     : undefined;
 
   return (
-    <button
+    <Button
+      variant="outline"
       aria-label="Add item to cart"
       disabled={isPending || !availableForSale || !selectedVariantId}
       title={title}
@@ -52,7 +54,7 @@ export function AddToCart({
         });
       }}
       className={clsx(
-        'relative flex w-full items-center justify-center rounded-full bg-slate-600 p-4 tracking-wide text-white hover:opacity-90',
+        'relative my-6 flex w-full  items-center justify-center  rounded-none border-black  px-4 py-6 tracking-wide text-black hover:opacity-90',
         {
           'cursor-not-allowed opacity-60 hover:opacity-60': !availableForSale || !selectedVariantId,
           'cursor-not-allowed': isPending
@@ -60,9 +62,13 @@ export function AddToCart({
       )}
     >
       <div className="absolute left-0 ml-4">
-        {!isPending ? <PlusIcon className="h-5" /> : <LoadingDots className="mb-3 bg-white" />}
+        {!isPending ? (
+          <PlusIcon className="h-5" />
+        ) : (
+          <LoadingDots className="left-0 mb-3 bg-black " />
+        )}
       </div>
       <span>{availableForSale ? 'Add To Cart' : 'Out Of Stock'}</span>
-    </button>
+    </Button>
   );
 }
