@@ -412,7 +412,7 @@ export async function getProducts({
       sortKey
     }
   });
-
+  console.log(reshapeProducts(removeEdgesAndNodes(res.body.data.products)));
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 

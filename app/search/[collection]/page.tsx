@@ -1,7 +1,7 @@
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
 import { defaultSort, sorting } from 'lib/constants';
-import { getProducts } from 'lib/shopify';
+import { getCollectionProducts } from 'lib/shopify';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
@@ -25,7 +25,7 @@ export default async function CategoryPage({
   const { sort, q: searchValue } = searchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
   return (
     <section>
       {products.length === 0 ? (
