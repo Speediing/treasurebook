@@ -41,7 +41,7 @@ const devOnlyPlugins = [visionTool()];
 
 export default defineConfig({
   name: 'default',
-  title: 'Sanity + Shopify demo',
+  title: 'Stephen J',
   basePath: '/admin',
   projectId,
   dataset,

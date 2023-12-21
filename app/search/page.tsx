@@ -1,7 +1,7 @@
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
 import { defaultSort, sorting } from 'lib/constants';
-import { getProductsSanity } from '../../sanity/lib/queries/products';
+import { getProducts } from 'lib/shopify';
 
 export const metadata = {
   title: 'Search',
@@ -17,7 +17,8 @@ export default async function SearchPage({
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
-  const products = await getProductsSanity();
+
+  const products = await getProducts({ sortKey, reverse, query: searchValue });
 
   const resultsText = products.length > 1 ? 'results' : 'result';
 
