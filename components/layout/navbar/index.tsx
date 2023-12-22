@@ -21,7 +21,7 @@ export default async function Navbar() {
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
-      <div className="flex w-full flex-row justify-between md:hidden">
+      {/* <div className="flex flex-row justify-between w-full md:hidden">
         <MobileMenu menu={navOptions} />
         <Link href={'/'} className="flex h-[44px] flex-col justify-center">
           <Image src={logoUrl} width={140} height={27.5} alt={''} />
@@ -31,14 +31,17 @@ export default async function Navbar() {
             <Cart />
           </Suspense>
         </div>
-      </div>
-      <div className="hidden w-full items-center md:flex">
-        <div className="flex w-full md:w-1/3">
+      </div> */}
+      <div className="l flex w-full flex-row items-center justify-between">
+        <div className="hidden w-full md:flex md:w-1/3">
           <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
             <LogoSquare logoUrl={logoUrl} />
           </Link>
         </div>
-        <div className="flex flex-row justify-center gap-6 md:flex md:w-1/3">
+        <div className={'flex md:hidden'}>
+          <MobileMenu menu={navOptions} />
+        </div>
+        <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (
             <div key={item.title}>
               <Link
@@ -50,10 +53,15 @@ export default async function Navbar() {
             </div>
           ))}
         </div>
+        <Link href={'/'} className="flex h-[44px] flex-col justify-center md:hidden">
+          <Image src={logoUrl} width={140} height={27.5} alt={''} />
+        </Link>
         <div className="flex justify-end gap-4 md:w-1/3">
-          <Suspense fallback={<OpenCart />}>
-            <Search />
-          </Suspense>
+          <div className={'hidden md:flex'}>
+            <Suspense fallback={<OpenCart />}>
+              <Search />
+            </Suspense>
+          </div>
           <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>
