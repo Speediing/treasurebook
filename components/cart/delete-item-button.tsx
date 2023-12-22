@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { removeItem } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
 import type { CartItem } from 'lib/shopify/types';
+// @ts-ignore
 import { useFormState, useFormStatus } from 'react-dom';
 
 function SubmitButton() {
