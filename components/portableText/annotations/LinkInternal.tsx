@@ -19,7 +19,7 @@ export default function LinkInternalAnnotation({ children, value }: Props) {
         'inline-flex items-center underline transition-opacity duration-200',
         'hover:opacity-60'
       )}
-      to={value?.slug}
+      href={value?.slug}
     >
       <>{children}</>
     </Link>
