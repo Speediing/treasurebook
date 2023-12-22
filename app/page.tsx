@@ -66,7 +66,7 @@ export default async function HomePage() {
       {pageContent.map((x: any) => {
         switch (x._type) {
           case 'fullWidthImage':
-            return <FullWidthImage imageUrl={urlForImage(x.image.asset._ref).url()} />;
+            return <FullWidthImage imageUrl={urlForImage(x.image.asset._ref)} />;
           case 'splitSmallText':
             return <SplitSmallText leftOptions={x.leftItems} rightOptions={x.rightItems} />;
           default:

@@ -39,7 +39,18 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
             priority={true}
           />
         )}
-
+        {/* {images.map((x) => {
+          return (
+            <Image
+              className="object-contain w-full h-full"
+              fill
+              sizes="(min-width: 1024px) 66vw, 100vw"
+              alt={images[imageIndex]?.altText as string}
+              src={images[imageIndex]?.src as string}
+              priority={true}
+            />
+          );
+        })} */}
         {images.length > 1 ? (
           <div className="absolute bottom-[15%] flex w-full justify-center">
             <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">

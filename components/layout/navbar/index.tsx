@@ -12,7 +12,7 @@ const { SITE_NAME } = process.env;
 export default async function Navbar() {
   const nav = await client.fetch(`*[_type == "headerNavigation"]`);
   const navData = nav[0];
-  const logoUrl = urlForImage(navData.logo.asset._ref).url();
+  const logoUrl = urlForImage(navData.logo.asset._ref);
   const navOptions = navData.napOptions.map((x: any) => {
     return { title: x.name, path: x.path.current };
   });

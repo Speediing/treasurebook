@@ -66,6 +66,13 @@ export default defineType({
       group: 'editorial'
     }),
     defineField({
+      name: 'imagesGallery',
+      title: 'Images gallery',
+      type: 'array',
+      of: [{ type: 'image' }],
+      group: 'editorial'
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'body',
