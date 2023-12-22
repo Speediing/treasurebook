@@ -80,6 +80,7 @@ import { addItem } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
 import { ProductVariant } from 'lib/shopify/types';
 import { useSearchParams } from 'next/navigation';
+// @ts-ignore
 import { useFormState, useFormStatus } from 'react-dom';
 
 function SubmitButton({
