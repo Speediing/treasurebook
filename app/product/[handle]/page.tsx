@@ -2,14 +2,18 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
+import clsx from 'clsx';
 import { GridTileImage } from 'components/grid/tile';
 import Footer from 'components/layout/footer';
+import PortableText from 'components/portableText/PortableText';
 import { Gallery } from 'components/product/gallery';
 import { ProductDescription } from 'components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
+import { urlForImage } from '../../../sanity/lib/image';
+import { getProductSanity } from '../../../sanity/lib/queries/products';
 
 export async function generateMetadata({
   params
@@ -51,7 +55,12 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
-
+  const productData = await getProductSanity(params.handle);
+  console.log(productData);
+  const productImages = productData.imagesGallery.map((x) => {
+    return urlForImage(x.id);
+  });
+  console.log(productImages);
   if (!product) return notFound();
 
   const productJsonLd = {
@@ -83,15 +92,23 @@ export default async function ProductPage({ params }: { params: { handle: string
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-4/6">
             <Gallery
-              images={product.images.map((image: Image) => ({
-                src: image.url,
-                altText: image.altText
+              images={productImages.map((image: Image) => ({
+                src: image,
+                altText: image
               }))}
             />
           </div>
 
           <div className="basis-full lg:basis-2/6">
             <ProductDescription product={product} />
+            <PortableText
+              blocks={productData.body}
+              centered
+              className={clsx(
+                'mx-auto max-w-[660px] px-4 pb-24 pt-8', //
+                'md:px-8'
+              )}
+            />
           </div>
         </div>
         <Suspense>
