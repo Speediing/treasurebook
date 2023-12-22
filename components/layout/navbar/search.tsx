@@ -25,7 +25,7 @@ export default function Search() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="relative  w-[250px] ">
+    <form onSubmit={onSubmit} className="relative  md:w-[250px] ">
       <input
         type="text"
         name="search"
