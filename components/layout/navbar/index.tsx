@@ -37,20 +37,6 @@ export default async function Navbar() {
           <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
             <LogoSquare logoUrl={logoUrl} />
           </Link>
-          {/* {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline "
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null} */}
         </div>
         <div className="flex flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (

@@ -10,8 +10,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import CloseCart from './close-cart';
-import DeleteItemButton from './delete-item-button';
-import EditItemQuantityButton from './edit-item-quantity-button';
+import { DeleteItemButton } from './delete-item-button';
+import { EditItemQuantityButton } from './edit-item-quantity-button';
 import OpenCart from './open-cart';
 
 type MerchandiseSearchParams = {
@@ -64,7 +64,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl ">
+            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl  md:w-[390px]">
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold">My Cart</p>
 
@@ -149,7 +149,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       );
                     })}
                   </ul>
-                  <div className="py-4 text-sm text-neutral-500 ">
+                  <div className="0 py-4 text-sm text-neutral-500">
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 ">
                       <p>Taxes</p>
                       <Price
@@ -173,7 +173,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                   </div>
                   <a
                     href={cart.checkoutUrl}
-                    className="block w-full rounded-full bg-slate-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                    className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
                     Proceed to Checkout
                   </a>
