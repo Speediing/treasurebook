@@ -1,8 +1,8 @@
 import Footer from 'components/layout/footer';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import { client } from '../sanity/lib/client';
-import { urlForImage } from '../sanity/lib/image';
+import { client } from '../../sanity/lib/client';
+import { urlForImage } from '../../sanity/lib/image';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
