@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity';
 export default defineType({
   name: 'splitSmallText',
   title: 'Split Small Text',
-  type: 'document',
+  type: 'object',
   fields: [
     defineField({
       name: 'name',

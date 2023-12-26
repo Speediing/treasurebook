@@ -12,8 +12,8 @@ import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
-import { urlForImage } from '../../../sanity/lib/image';
-import { getProductSanity } from '../../../sanity/lib/queries/products';
+import { urlForImage } from '../../../../sanity/lib/image';
+import { getProductSanity } from '../../../../sanity/lib/queries/products';
 
 export async function generateMetadata({
   params

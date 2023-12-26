@@ -59,7 +59,7 @@ const SplitSmallText = ({
 };
 
 export default async function HomePage() {
-  const content = await client.fetch(`*[_type == "page" && slug.current == "/"]`);
+  const content = await client.fetch(`*[_type == "page" && slug.current == "home"]`);
   const pageContent = content[0].pageBuilder;
   return (
     <>
