@@ -2,30 +2,46 @@ import { Button } from '@/components/ui/button';
 
 export default function Footer() {
   return (
-    <footer className="py-y my-9 border-t border-gray-300 bg-white p-4 sm:p-6">
-      <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-2">
+    <footer className="mt-9 border-t border-gray-300 bg-white px-4 pb-8 pt-10 sm:px-6 sm:pb-12 sm:pt-12">
+      <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 md:grid-cols-3">
         <div>
-          <p className="text-sm text-gray-600">Artisan hair care and styling brand.</p>
-          <p className="mt-2 text-sm text-gray-600">Made in Canada.</p>
-          <p className="mt-2 text-sm text-gray-600">Botanically Based.</p>
-          <div className="mt-4 flex space-x-4">
-            <PinIcon className="h-6 w-6 text-gray-600" />
-            <InstagramIcon className="h-6 w-6 text-gray-600" />
-            <YoutubeIcon className="h-6 w-6 text-gray-600" />
-          </div>
-          <p className="mt-4 text-xs text-gray-500">© 2023, STEPHEN J Powered by Shopify</p>
+          <p className="text-sm text-gray-400">Artisan hair care and styling brand.</p>
+          <p className="mt-2 text-sm text-gray-400">Made in Canada.</p>
+          <p className="mt-2 text-sm text-gray-400">Botanically Based.</p>
+          {/* <div className="flex mt-4 space-x-4">
+            <PinIcon className="w-6 h-6 text-gray-600" />
+            <InstagramIcon className="w-6 h-6 text-gray-600" />
+            <YoutubeIcon className="w-6 h-6 text-gray-600" />
+          </div> */}
+          <p className="mt-4 hidden text-xs text-gray-500 md:flex">
+            © 2023, STEPHEN J Powered by Shopify
+          </p>
         </div>
         <div>
+          <p className="text-sm text-gray-900">Pinterest</p>
+          <p className="mt-2 text-sm text-gray-900">Instagram</p>
+          <p className="mt-2 text-sm text-gray-900">Youtube</p>
+          {/* <div className="flex mt-4 space-x-4">
+            <PinIcon className="w-6 h-6 text-gray-600" />
+            <InstagramIcon className="w-6 h-6 text-gray-600" />
+            <YoutubeIcon className="w-6 h-6 text-gray-600" />
+          </div> */}
+          {/* <p className="mt-4 text-xs text-gray-500">© 2023, STEPHEN J Powered by Shopify</p> */}
+        </div>
+        <div className="flex flex-col justify-start">
           <h2 className="text-lg font-semibold">Newsletter</h2>
-          <form className="mt-4 flex">
+          <form className="flex ">
             <input
               aria-label="Email address"
-              className="flex-grow border-b-2 border-gray-300 px-4 py-2 text-sm placeholder-gray-400 focus:outline-none"
+              className="flex-grow border-b border-gray-900 py-2 pr-4 text-sm placeholder-gray-400 focus:outline-none"
               placeholder="Email address"
               type="email"
             />
-            <Button className="ml-4">Subscribe</Button>
+            <Button className="ml-4 rounded-none border border-gray-900">Subscribe</Button>
           </form>
+          <p className="mt-8 flex text-xs text-gray-500 md:hidden">
+            © 2023, STEPHEN J Powered by Shopify
+          </p>
         </div>
       </div>
     </footer>
