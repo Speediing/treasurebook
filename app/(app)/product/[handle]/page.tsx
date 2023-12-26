@@ -12,8 +12,8 @@ import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
-import { urlForImage } from '../../../sanity/lib/image';
-import { getProductSanity } from '../../../sanity/lib/queries/products';
+import { urlForImage } from '../../../../sanity/lib/image';
+import { getProductSanity } from '../../../../sanity/lib/queries/products';
 
 export async function generateMetadata({
   params
@@ -56,11 +56,11 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
   const productData = await getProductSanity(params.handle);
-  console.log(productData);
+
   const productImages = productData.imagesGallery.map((x) => {
     return urlForImage(x.id);
   });
-  console.log(productImages);
+
   if (!product) return notFound();
 
   const productJsonLd = {

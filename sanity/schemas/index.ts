@@ -81,6 +81,8 @@ import shopifyProductVariant from './objects/shopify/shopifyProductVariant';
 // Collections
 import collectionGroup from './objects/collection/group';
 import collectionLinks from './objects/collection/links';
+import fullWidthImage from './objects/fullWidthImage';
+import splitSmallText from './objects/splitSmallText';
 
 const objects = [
   customProductOptionColor,
@@ -88,6 +90,8 @@ const objects = [
   customProductOptionSize,
   customProductOptionSizeObject,
   footer,
+  splitSmallText,
+  fullWidthImage,
   imageWithProductHotspots,
   inventory,
   links,

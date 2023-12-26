@@ -10,6 +10,11 @@ export default defineField({
   },
   fields: [
     // Links
+    {
+      title: 'Logo',
+      name: 'logo',
+      type: 'image'
+    },
     defineField({
       name: 'links',
       title: 'Links',

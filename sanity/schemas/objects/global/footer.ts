@@ -16,42 +16,53 @@ export default defineField({
       type: 'array',
       of: [{ type: 'linkInternal' }, { type: 'linkExternal' }]
     }),
-    // Text
     defineField({
       name: 'text',
       title: 'Text',
       type: 'array',
-      of: [
-        {
-          lists: [],
-          marks: {
-            annotations: [
-              // Email
-              {
-                title: 'Email',
-                name: 'annotationLinkEmail',
-                type: 'annotationLinkEmail'
-              },
-              // Internal link
-              {
-                title: 'Internal page',
-                name: 'annotationLinkInternal',
-                type: 'annotationLinkInternal'
-              },
-              // URL
-              {
-                title: 'URL',
-                name: 'annotationLinkExternal',
-                type: 'annotationLinkExternal'
-              }
-            ],
-            decorators: []
-          },
-          // Block styles
-          styles: [{ title: 'Normal', value: 'normal' }],
-          type: 'block'
-        }
-      ]
-    })
+      of: [{ type: 'string' }]
+    }),
+    {
+      name: 'copyright',
+      title: 'Copyright',
+      type: 'string'
+    }
+    // // Text
+    // defineField({
+    //   name: 'text',
+    //   title: 'Text',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       lists: [],
+    //       marks: {
+    //         annotations: [
+    //           // Email
+    //           {
+    //             title: 'Email',
+    //             name: 'annotationLinkEmail',
+    //             type: 'annotationLinkEmail'
+    //           },
+    //           // Internal link
+    //           {
+    //             title: 'Internal page',
+    //             name: 'annotationLinkInternal',
+    //             type: 'annotationLinkInternal'
+    //           },
+    //           // URL
+    //           {
+    //             title: 'URL',
+    //             name: 'annotationLinkExternal',
+    //             type: 'annotationLinkExternal'
+    //           }
+    //         ],
+    //         decorators: []
+    //       },
+    //       // Block styles
+    //       styles: [{ title: 'Normal', value: 'normal' }],
+    //       type: 'block'
+    //     }
+    //   ]
+    // })
   ]
 });

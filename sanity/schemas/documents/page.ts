@@ -1,18 +1,14 @@
 import { DocumentIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineArrayMember, defineField } from 'sanity';
 
 import { validateSlug } from '../../utils/validateSlug';
 
 export default defineField({
-  name: 'page2',
+  name: 'page',
   title: 'Page',
   type: 'document',
   icon: DocumentIcon,
   groups: [
-    {
-      name: 'theme',
-      title: 'Theme'
-    },
     {
       default: true,
       name: 'editorial',
@@ -40,43 +36,31 @@ export default defineField({
       validation: validateSlug
     }),
     // Color theme
-    defineField({
-      name: 'colorTheme',
-      title: 'Color theme',
-      type: 'reference',
-      to: [{ type: 'colorTheme' }],
-      group: 'theme'
-    }),
+
     // Show hero
-    defineField({
-      name: 'showHero',
-      title: 'Show hero',
-      type: 'boolean',
-      description: 'If disabled, page title will be displayed instead',
-      initialValue: false,
-      group: 'editorial'
-    }),
-    // Hero
-    defineField({
-      name: 'hero',
-      title: 'Hero',
-      type: 'hero.page',
-      hidden: ({ document }) => !document?.showHero,
-      group: 'editorial'
-    }),
-    // Body
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'body',
-      group: 'editorial'
-    }),
+
     // SEO
     defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seo.page',
       group: 'seo'
+    }),
+    defineField({
+      name: 'pageBuilder',
+      type: 'array',
+      title: 'Page builder',
+      group: 'editorial',
+      of: [
+        defineArrayMember({
+          name: 'fullWidthImage',
+          type: 'fullWidthImage'
+        }),
+        defineArrayMember({
+          name: 'splitSmallText',
+          type: 'splitSmallText'
+        })
+      ]
     })
   ],
   preview: {

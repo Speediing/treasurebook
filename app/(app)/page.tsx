@@ -1,8 +1,8 @@
 import Footer from 'components/layout/footer';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import { client } from '../sanity/lib/client';
-import { urlForImage } from '../sanity/lib/image';
+import { client } from '../../sanity/lib/client';
+import { urlForImage } from '../../sanity/lib/image';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
@@ -59,7 +59,7 @@ const SplitSmallText = ({
 };
 
 export default async function HomePage() {
-  const content = await client.fetch(`*[_type == "page" && slug.current == "/"]`);
+  const content = await client.fetch(`*[_type == "page" && slug.current == "home"]`);
   const pageContent = content[0].pageBuilder;
   return (
     <>

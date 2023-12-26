@@ -4,20 +4,13 @@ import LogoSquare from 'components/logo-square';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { client } from '../../../sanity/lib/client';
-import { urlForImage } from '../../../sanity/lib/image';
+import { getNavItemsSanity } from '../../../sanity/lib/queries/layout';
 import MobileMenu from './mobile-menu';
 
 import Search from './search';
-const { SITE_NAME } = process.env;
 
 export default async function Navbar() {
-  const nav = await client.fetch(`*[_type == "headerNavigation"]`);
-  const navData = nav[0];
-  const logoUrl = urlForImage(navData.logo.asset._ref);
-  const navOptions = navData.napOptions.map((x: any) => {
-    return { title: x.name, path: x.path.current };
-  });
+  const { navOptions, logoUrl } = await getNavItemsSanity();
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">

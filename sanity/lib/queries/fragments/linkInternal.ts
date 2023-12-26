@@ -13,7 +13,7 @@ export const LINK_INTERNAL = groq`
       "slug": "/",
     },
     (_type == "page") => {
-      "slug": "/pages/" + slug.current,
+      "slug": "/" + slug.current,
     },
     (_type == "product" && store.isEnabled && store.status == "active") => {
       "slug": "/products/" + store.slug.current,

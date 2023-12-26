@@ -4,8 +4,6 @@
 // @ts-ignore
 import { ListItemBuilder, StructureResolver } from 'sanity/desk';
 import collections from './collectionStructure';
-import colorThemes from './colorThemeStructure';
-import home from './homeStructure';
 import pages from './pageStructure';
 import products from './productStructure';
 import settings from './settingStructure';
@@ -47,13 +45,13 @@ export const structure: StructureResolver = (S: any, context: any) =>
   S.list()
     .title('Content')
     .items([
-      home(S, context),
+      // home(S, context),
       pages(S, context),
       S.divider(),
       collections(S, context),
       products(S, context),
-      S.divider(),
-      colorThemes(S, context),
+      // S.divider(),
+      // colorThemes(S, context),
       S.divider(),
       settings(S, context),
       S.divider(),
