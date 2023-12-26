@@ -26,7 +26,6 @@ export const getProductSanity = async (handle: string) => {
     ${PRODUCT_PAGE}
   }
 `;
-  console.log(PRODUCT_PAGE_QUERY);
   const product = await client.fetch(PRODUCT_PAGE_QUERY);
   return product;
 };

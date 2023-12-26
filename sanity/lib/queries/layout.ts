@@ -41,3 +41,28 @@ export const getNavItemsSanity = async () => {
   });
   return { navOptions, logoUrl };
 };
+
+export const FOOTER_QUERY = groq`
+  *[_type == 'settings'] | order(_updatedAt desc) [0] {
+
+    footer {
+        links[] {
+          ${LINKS}
+        },
+        text[],
+        copyright
+      },
+     
+  }
+`;
+
+export const getNavFooterSanity = async () => {
+  let nav;
+  try {
+    nav = await client.fetch(FOOTER_QUERY);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return { footer: nav.footer };
+};

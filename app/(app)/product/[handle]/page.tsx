@@ -56,11 +56,11 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
   const productData = await getProductSanity(params.handle);
-  console.log(productData);
+
   const productImages = productData.imagesGallery.map((x) => {
     return urlForImage(x.id);
   });
-  console.log(productImages);
+
   if (!product) return notFound();
 
   const productJsonLd = {
