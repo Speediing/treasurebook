@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 
 import clsx from 'clsx';
 import { GridTileImage } from 'components/grid/tile';
-import Footer from 'components/layout/footer';
 import PortableText from 'components/portableText/PortableText';
 import { Gallery } from 'components/product/gallery';
 import { ProductDescription } from 'components/product/product-description';
@@ -115,9 +114,6 @@ export default async function ProductPage({ params }: { params: { handle: string
           <RelatedProducts id={product.id} />
         </Suspense>
       </div>
-      <Suspense>
-        <Footer />
-      </Suspense>
     </>
   );
 }

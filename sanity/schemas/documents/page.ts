@@ -59,6 +59,10 @@ export default defineField({
         defineArrayMember({
           name: 'splitSmallText',
           type: 'splitSmallText'
+        }),
+        defineArrayMember({
+          name: 'Biography',
+          type: 'biography'
         })
       ]
     })
