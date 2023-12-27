@@ -13,7 +13,7 @@ export const Biography = ({
 }) => {
   return (
     <>
-      <div className="px-4 pb-8 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl ">
           <Image
             alt="Abstract bubbles"
@@ -32,7 +32,7 @@ export const Biography = ({
             blocks={body}
             centered
             className={clsx(
-              'mx-auto max-w-[660px]  pb-24 pt-8', //
+              'mx-auto max-w-[660px]  pt-8', //
               ''
             )}
           />
