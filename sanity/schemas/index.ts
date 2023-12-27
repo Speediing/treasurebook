@@ -79,6 +79,7 @@ import shopifyProduct from './objects/shopify/shopifyProduct';
 import shopifyProductVariant from './objects/shopify/shopifyProductVariant';
 
 // Collections
+import biography from './objects/biography';
 import collectionGroup from './objects/collection/group';
 import collectionLinks from './objects/collection/links';
 import fullWidthImage from './objects/fullWidthImage';
@@ -133,7 +134,8 @@ const objects = [
   shopifyProduct,
   shopifyProductVariant,
   collectionGroup,
-  collectionLinks
+  collectionLinks,
+  biography
 ];
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents];

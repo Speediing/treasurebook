@@ -1,8 +1,10 @@
 import { Analytics } from '@vercel/analytics/react';
+import Footer from 'components/layout/footer';
 import Navbar from 'components/layout/navbar';
 import { ensureStartsWith } from 'lib/utils';
 import { Inter } from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import '../globals.css';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -47,6 +49,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <main>{children}</main>
         </Suspense>
         <Analytics />
+        <SpeedInsights />
+        <Footer />
       </body>
     </html>
   );
