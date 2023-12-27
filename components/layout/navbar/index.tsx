@@ -32,7 +32,9 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          <MobileMenu menu={navOptions} />
+          <Suspense>
+            <MobileMenu menu={navOptions} />
+          </Suspense>
         </div>
         <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (

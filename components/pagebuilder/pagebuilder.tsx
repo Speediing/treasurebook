@@ -9,7 +9,6 @@ export const PageBuilder = async ({ slug }: { slug: string }) => {
   return (
     <>
       {pageContent.map((x: any) => {
-        console.log(x);
         switch (x._type) {
           case 'fullWidthImage':
             return <FullWidthImage imageUrl={urlForImage(x.image.asset._ref)} />;
