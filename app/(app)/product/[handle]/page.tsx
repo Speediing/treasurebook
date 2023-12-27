@@ -88,8 +88,8 @@ export default async function ProductPage({ params }: { params: { handle: string
         }}
       />
       <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-none border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
-          <div className="h-full w-full basis-full lg:basis-4/6">
+        <div className="relative flex flex-col rounded-none border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
+          <div className="h-full w-full basis-full lg:basis-3/6">
             <Gallery
               images={productImages.map((image: Image) => ({
                 src: image,
@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: { params: { handle: string
             />
           </div>
 
-          <div className="basis-full lg:basis-2/6">
+          <div className="sticky top-0 h-fit basis-full lg:basis-3/6">
             <ProductDescription product={product} />
             <PortableText
               blocks={productData.body}
