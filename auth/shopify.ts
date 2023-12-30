@@ -29,14 +29,14 @@ async function exchangeAccessToken(access_token: string) {
     }
   );
 
-  interface AccessTokenResponse {
-    access_token: string;
-    expires_in: number;
-    error?: string;
-    error_description?: string;
-  }
+  //   interface AccessTokenResponse {
+  //     access_token: string;
+  //     expires_in: number;
+  //     error?: string;
+  //     error_description?: string;
+  //   }
 
-  const data = await response.json<AccessTokenResponse>();
+  const data = await response.json();
   if (data.error) {
     throw new Response(data.error_description, { status: 400 });
   }
@@ -146,12 +146,12 @@ export async function authenticateShopifyCode(code: string, state: string) {
     body
   });
 
-  interface AccessTokenResponse {
-    access_token: string;
-    expires_in: number;
-    id_token: string;
-    refresh_token: string;
-  }
+  //   interface AccessTokenResponse {
+  //     access_token: string;
+  //     expires_in: number;
+  //     id_token: string;
+  //     refresh_token: string;
+  //   }
 
   if (!response.ok) {
     throw new Response(await response.text(), {
