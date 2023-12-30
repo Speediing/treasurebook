@@ -366,7 +366,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </div>
                   </div>
                   <a
-                    href={checkoutUrl}
+                    href={checkoutUrl.toString()}
                     className="block w-full rounded-none border border-gray-300 bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
                     Proceed to Checkout
