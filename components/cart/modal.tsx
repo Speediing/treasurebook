@@ -223,7 +223,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
       quantityRef.current = cart?.totalQuantity;
     }
   }, [isOpen, cart?.totalQuantity, quantityRef]);
-  const checkoutUrl = new URL(cart.checkoutUrl);
+  const checkoutUrl = new URL(cart?.checkoutUrl || '');
   checkoutUrl.searchParams.append('logged_in', 'true');
   return (
     <>
