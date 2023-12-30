@@ -223,7 +223,8 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
       quantityRef.current = cart?.totalQuantity;
     }
   }, [isOpen, cart?.totalQuantity, quantityRef]);
-
+  const checkoutUrl = new URL(cart.checkoutUrl);
+  checkoutUrl.searchParams.append('logged_in', 'true');
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
@@ -365,7 +366,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     </div>
                   </div>
                   <a
-                    href={cart.checkoutUrl}
+                    href={checkoutUrl}
                     className="block w-full rounded-none border border-gray-300 bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
                     Proceed to Checkout

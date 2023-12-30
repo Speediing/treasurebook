@@ -17,7 +17,6 @@ export const getProductsSanity = async ({ sortKey, reverse, query }: any) => {
 };
 
 export const getProductSanity = async (handle: string) => {
-  console.log(handle);
   const PRODUCT_PAGE_QUERY = groq`
   *[
     _type == 'product'

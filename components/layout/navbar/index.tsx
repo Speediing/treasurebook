@@ -7,10 +7,17 @@ import { Suspense } from 'react';
 import { getNavItemsSanity } from '../../../sanity/lib/queries/layout';
 import MobileMenu from './mobile-menu';
 
+import { logoutShopify, startShopifyAuth } from 'auth/shopify';
 import Search from './search';
 
 export default async function Navbar() {
   const { navOptions, logoUrl } = await getNavItemsSanity();
+  // try {
+  //   const test = await getCustomer();
+  //   console.log(test);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
@@ -57,7 +64,14 @@ export default async function Navbar() {
               <Search />
             </Suspense>
           </div>
-          <Suspense fallback={<OpenCart />}>
+          <form action={startShopifyAuth}>
+            <button type="submit">Login</button>
+          </form>
+          <form action={logoutShopify}>
+            <button type="submit">Logout</button>
+          </form>
+          {/* <a href="/api/authorize">Login</a> */}
+          <Suspense>
             <Cart />
           </Suspense>
         </div>
