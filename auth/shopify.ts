@@ -162,8 +162,7 @@ export async function authenticateShopifyCode(code: string, state: string) {
     });
   }
 
-  const { access_token, expires_in, id_token, refresh_token } =
-    await response.json<AccessTokenResponse>();
+  const { access_token, expires_in, id_token, refresh_token } = await response.json();
 
   //   const nonce = getNonce(id_token);
 
