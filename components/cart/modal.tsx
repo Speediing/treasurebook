@@ -365,12 +365,12 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       />
                     </div>
                   </div>
-                  <a
+                  {/* <a
                     href={checkoutUrl.toString()}
-                    className="block w-full rounded-none border border-gray-300 bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                    className="block w-full p-3 text-sm font-medium text-center text-white bg-black border border-gray-300 rounded-none opacity-90 hover:opacity-100"
                   >
                     Proceed to Checkout
-                  </a>
+                  </a> */}
                 </div>
               )}
             </Dialog.Panel>
