@@ -4,18 +4,22 @@ import { ensureStartsWith } from 'lib/utils';
 import { revalidateTag } from 'next/cache';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { getPageSession } from 'auth/session';
 import {
   addToCartMutation,
   createCartMutation,
   editCartItemsMutation,
   removeFromCartMutation
 } from './mutations/cart';
+import { updateCustomerMutation } from './mutations/customer';
 import { getCartQuery } from './queries/cart';
 import {
   getCollectionProductsQuery,
   getCollectionQuery,
   getCollectionsQuery
 } from './queries/collection';
+import { getCustomerQuery } from './queries/customer';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
@@ -55,6 +59,7 @@ const domain = process.env.SHOPIFY_STORE_DOMAIN
   : '';
 const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`;
 const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
+const customerEndpoint = `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/account/customer/api/unstable/graphql`;
 
 type ExtractVariables<T> = T extends { variables: object } ? T['variables'] : never;
 
@@ -77,6 +82,71 @@ export async function shopifyFetch<T>({
       headers: {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': key,
+        ...headers
+      },
+      body: JSON.stringify({
+        ...(query && { query }),
+        ...(variables && { variables })
+      }),
+      cache,
+      ...(tags && { next: { tags } })
+    });
+
+    const body = await result.json();
+
+    if (body.errors) {
+      throw body.errors[0];
+    }
+
+    return {
+      status: result.status,
+      body
+    };
+  } catch (e) {
+    if (isShopifyError(e)) {
+      throw {
+        cause: e.cause?.toString() || 'unknown',
+        status: e.status || 500,
+        message: e.message,
+        query
+      };
+    }
+
+    throw {
+      error: e,
+      query
+    };
+  }
+}
+
+export async function shopifyCustomerFetch<T>({
+  cache = 'force-cache',
+  headers,
+  query,
+  tags,
+  variables,
+  accessToken
+}: {
+  cache?: RequestCache;
+  headers?: HeadersInit;
+  query: string;
+  tags?: string[];
+  variables?: ExtractVariables<T>;
+  accessToken?: string;
+}): Promise<{ status: number; body: T } | never> {
+  let session;
+  try {
+    session = await getPageSession();
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const result = await fetch(customerEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken ? accessToken : session.accessToken,
         ...headers
       },
       body: JSON.stringify({
@@ -414,6 +484,41 @@ export async function getProducts({
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
+export async function getCustomer({
+  accessToken
+}: {
+  accessToken?: string;
+}): Promise<any | undefined> {
+  const res = await shopifyCustomerFetch<any>({
+    query: getCustomerQuery,
+    variables: {},
+    cache: 'no-store',
+    accessToken: accessToken
+  });
+  const { emailAddress, firstName, lastName, phoneNumber } = res.body.data.customer;
+  const customer = {
+    firstName,
+    lastName,
+    emailAddress: emailAddress?.emailAddress || null,
+    phoneNumber: phoneNumber?.phoneNumber || null
+  };
+  return customer;
+}
+
+export async function updateCustomer(input: {
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+}): Promise<Cart> {
+  const res = await shopifyCustomerFetch<any>({
+    query: updateCustomerMutation,
+    variables: {
+      input
+    },
+    cache: 'no-store'
+  });
+  return res.body;
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

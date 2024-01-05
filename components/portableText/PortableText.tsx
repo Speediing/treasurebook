@@ -1,4 +1,4 @@
-import { PortableText as PortableTextReact, PortableTextComponents } from '@portabletext/react';
+import { PortableTextComponents, PortableText as PortableTextReact } from '@portabletext/react';
 import { PortableTextBlock } from '@sanity/types';
 import clsx from 'clsx';
 import { useMemo } from 'react';
@@ -33,12 +33,12 @@ export default function PortableText({ blocks, centered, className }: Props) {
     },
     block: Block
     // types: {
-    //   'module.accordion': AccordionBlock,
-    //   'module.callout': (props: any) => <CalloutBlock centered={centered} {...props} />,
-    //   'module.grid': GridBlock,
-    //   'module.images': (props: any) => <ImagesBlock centered={centered} {...props} />,
-    //   'module.instagram': InstagramBlock,
-    //   'module.products': ProductsBlock
+    //   'module.accordion': AccordionBlock
+    //   // 'module.callout': (props: any) => <CalloutBlock centered={centered} {...props} />,
+    //   // 'module.grid': GridBlock,
+    //   // 'module.images': (props: any) => <ImagesBlock centered={centered} {...props} />,
+    //   // 'module.instagram': InstagramBlock,
+    //   // 'module.products': ProductsBlock
     // }
   };
 
