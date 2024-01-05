@@ -18,7 +18,7 @@ const updateCustomerDetails = async (data: FormData) => {
   revalidatePath('/account/details');
 };
 export default async function DetailPage() {
-  const { firstName, lastName, emailAddress } = await getAccountDetails();
+  const account = await getAccountDetails();
 
   return (
     <div className="">
@@ -26,7 +26,7 @@ export default async function DetailPage() {
       <form className="space-y-6" action={updateCustomerDetails}>
         <div className="flex flex-col">
           <label className="" htmlFor="email">
-            {emailAddress}
+            {account?.emailAddress}
           </label>
         </div>
         <div className="flex flex-col">
@@ -34,11 +34,16 @@ export default async function DetailPage() {
             name="firstName"
             id="firstName"
             placeholder="First Name"
-            defaultValue={firstName}
+            defaultValue={account?.firstName}
           />
         </div>
         <div className="flex flex-col">
-          <Input name="lastName" id="lastName" placeholder="Last Name" defaultValue={lastName} />
+          <Input
+            name="lastName"
+            id="lastName"
+            placeholder="Last Name"
+            defaultValue={account?.lastName}
+          />
         </div>
 
         {/* <div className="flex flex-col">
