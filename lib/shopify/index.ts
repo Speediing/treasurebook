@@ -4,12 +4,15 @@ import { ensureStartsWith } from 'lib/utils';
 import { revalidateTag } from 'next/cache';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { getPageSession } from 'auth/session';
 import {
   addToCartMutation,
   createCartMutation,
   editCartItemsMutation,
   removeFromCartMutation
 } from './mutations/cart';
+import { updateCustomerMutation } from './mutations/customer';
 import { getCartQuery } from './queries/cart';
 import {
   getCollectionProductsQuery,
@@ -131,15 +134,19 @@ export async function shopifyCustomerFetch<T>({
   variables?: ExtractVariables<T>;
   accessToken?: string;
 }): Promise<{ status: number; body: T } | never> {
-  // const session = getSession();
-  // if (accessToken === '') throw { error: 'bad' };
-
+  let session;
+  try {
+    session = await getPageSession();
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(session);
   try {
     const result = await fetch(customerEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: accessToken || '',
+        Authorization: accessToken ? accessToken : session.accessToken,
         ...headers
       },
       body: JSON.stringify({
@@ -479,20 +486,39 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
-export async function getCustomer(accessToken: string | undefined): Promise<Cart | undefined> {
+export async function getCustomer({
+  accessToken
+}: {
+  accessToken?: string;
+}): Promise<any | undefined> {
   const res = await shopifyCustomerFetch<any>({
     query: getCustomerQuery,
     variables: {},
     cache: 'no-store',
-    accessToken: accessToken || ''
+    accessToken: accessToken
   });
+  const { emailAddress, firstName, lastName, phoneNumber } = res.body.data.customer;
+  const customer = {
+    firstName,
+    lastName,
+    emailAddress: emailAddress?.emailAddress || null,
+    phoneNumber: phoneNumber?.phoneNumber || null
+  };
+  return customer;
+}
 
-  // Old carts becomes `null` when you checkout.
-  // if (!res.body.data.cart) {
-  //   return undefined;
-  // }
-
-  return res.body.data;
+export async function updateCustomer(input: {
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+}): Promise<Cart> {
+  const res = await shopifyCustomerFetch<any>({
+    query: updateCustomerMutation,
+    variables: {
+      input
+    },
+    cache: 'no-store'
+  });
+  return res.body;
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

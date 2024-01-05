@@ -1,9 +1,6 @@
 import { lucia } from 'lucia';
 import { nextjs_future } from 'lucia/middleware';
-// import "lucia/polyfill/node";
-
-import * as context from 'next/headers';
-import { cache } from 'react';
+// import 'lucia/polyfill/node';
 
 import { pg } from '@lucia-auth/adapter-postgresql';
 import { upstash } from '@lucia-auth/adapter-session-redis';
@@ -32,8 +29,3 @@ export const auth = lucia({
 });
 
 export type Auth = typeof auth;
-
-export const getPageSession = cache(() => {
-  const authRequest = auth.handleRequest('GET', context);
-  return authRequest.validate();
-});

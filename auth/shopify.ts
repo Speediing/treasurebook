@@ -4,6 +4,7 @@ import { getCustomer } from 'lib/shopify';
 import * as context from 'next/headers';
 import { cookies, headers } from 'next/headers';
 import { RedirectType, redirect } from 'next/navigation';
+import { getPageSession } from './session';
 async function exchangeAccessToken(access_token: string) {
   const body = new URLSearchParams();
   const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
@@ -76,7 +77,7 @@ export async function startShopifyAuth() {
   authorizationRequestUrl.searchParams.append('response_type', 'code');
   authorizationRequestUrl.searchParams.append(
     'redirect_uri',
-    `${process.env.SHOPIFY_REDIRECT_URL}/api/authorize` || ''
+    `${process.env.VERCEL_URL}/api/authorize` || ''
   );
 
   authorizationRequestUrl.searchParams.append('state', state);
@@ -91,19 +92,23 @@ export async function startShopifyAuth() {
 }
 
 export async function logoutShopify() {
-  const headerValue = cookies().get('auth');
-  const headerJson = JSON.parse(headerValue?.value || '');
+  const { id_token, sessionId } = await getPageSession();
 
   const authorizationRequestUrl = new URL(
-    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${headerJson.id_token}&post_logout_redirect_uri=${process.env.SHOPIFY_REDIRECT_URL}`
+    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${id_token}&post_logout_redirect_uri=${process.env.VERCEL_URL}`
   );
-  authorizationRequestUrl.searchParams.append('id_token_hint', headerJson.id_token);
+  authorizationRequestUrl.searchParams.append('id_token_hint', id_token);
   authorizationRequestUrl.searchParams.append(
     'post_logout_redirect_uri',
-    process.env.SHOPIFY_REDIRECT_URL || ''
+    process.env.VERCEL_URL || ''
   );
-  cookies().delete('auth');
-
+  await auth.invalidateSession(sessionId);
+  // delete session cookie
+  const authRequest = auth.handleRequest('GET', {
+    cookies,
+    headers
+  });
+  authRequest.setSession(null);
   return redirect(authorizationRequestUrl.toString(), RedirectType.replace);
 }
 
@@ -120,7 +125,7 @@ export async function authenticateShopifyCode(code: string, state: string) {
     });
   }
 
-  const origin = new URL(process.env.SHOPIFY_REDIRECT_URL || ''); // In development this would resolve to the tunneled host or an Oxygen generated host.
+  const origin = new URL(process.env.VERCEL_URL || ''); // In development this would resolve to the tunneled host or an Oxygen generated host.
 
   const body = new URLSearchParams();
 
@@ -170,28 +175,37 @@ export async function authenticateShopifyCode(code: string, state: string) {
   //     throw new Response('Nonce does not match', { status: 400 });
 
   const accessToken = await exchangeAccessToken(access_token);
-
+  console.log(accessToken);
   let customer;
   try {
-    customer = await getCustomer(accessToken);
+    customer = await getCustomer({ accessToken });
     console.log(customer);
   } catch (error) {
     console.log(error);
   }
-  const user = await auth.createUser({
-    key: {
-      providerId: 'shopify',
-      providerUserId: customer.customer.emailAddress.emailAddress,
-      password: null
-    },
-    attributes: {}
-  });
+
+  let user;
+  let createdUser = false;
+  try {
+    user = await auth.createUser({
+      key: {
+        providerId: 'shopify',
+        providerUserId: customer.emailAddress,
+        password: null
+      },
+      attributes: {}
+    });
+    createdUser = true;
+  } catch (error) {
+    user = await auth.getKey('shopify', customer.emailAddress);
+    console.log(error);
+  }
 
   const session = await auth.createSession({
     userId: user.userId,
     attributes: {
       customer_authorization_code_token: access_token,
-      expires_in: expires_in,
+      expires_at: new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime(),
       id_token: id_token,
       refresh_token: refresh_token,
       accessToken: accessToken
@@ -202,5 +216,8 @@ export async function authenticateShopifyCode(code: string, state: string) {
     headers
   });
   authRequest.setSession(session);
+  if (createdUser) {
+    return redirect('/account/details', RedirectType.replace);
+  }
   return redirect('/', RedirectType.replace);
 }

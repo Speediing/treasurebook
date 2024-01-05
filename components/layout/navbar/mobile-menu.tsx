@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { startShopifyAuth } from 'auth/shopify';
 import { Menu } from 'lib/shopify/types';
 import Search from './search';
 
@@ -15,7 +16,6 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
@@ -35,7 +35,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center rounded-none text-black transition-colors dark:text-white md:hidden"
+        className="flex h-11 w-11 items-center justify-center rounded-none text-black transition-colors md:hidden dark:text-white"
       >
         <Bars3Icon className="h-4" />
       </button>
@@ -76,16 +76,30 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                 </div>
                 {menu.length ? (
                   <ul className="flex w-full flex-col">
-                    {menu.map((item: Menu) => (
-                      <li
-                        className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                        key={item.title}
-                      >
-                        <Link href={item.path} onClick={closeMobileMenu}>
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
+                    {menu.map((item: Menu) => {
+                      if (item.title === 'Login') {
+                        return (
+                          <li
+                            className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+                            key={item.title}
+                          >
+                            <form action={startShopifyAuth}>
+                              <button type="submit">{item.title}</button>
+                            </form>
+                          </li>
+                        );
+                      }
+                      return (
+                        <li
+                          className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+                          key={item.title}
+                        >
+                          <Link href={item.path} onClick={closeMobileMenu}>
+                            {item.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : null}
               </div>

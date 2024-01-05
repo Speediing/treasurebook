@@ -4,6 +4,11 @@ export const getCustomerQuery = /* GraphQL */ `
       emailAddress {
         emailAddress
       }
+      firstName
+      lastName
+      phoneNumber {
+        phoneNumber
+      }
     }
   }
 `;
