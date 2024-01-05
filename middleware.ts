@@ -10,6 +10,7 @@ export async function middleware(request: NextRequest) {
   const session = await authRequest.validate();
 
   if (session?.expires_at < new Date().getTime()) {
+    console.log('expired');
     try {
       await refreshToken(session);
     } catch (error) {
@@ -19,20 +20,16 @@ export async function middleware(request: NextRequest) {
 }
 export async function refreshToken(session: any) {
   const clientId = process.env.SHOPIFY_CLIENT_ID || '';
-  // let session;
-  // try {
-  //   session = await getPageSession();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+
   const body = new URLSearchParams();
 
   body.append('grant_type', 'refresh_token');
   body.append('refresh_token', session.refresh_token);
   body.append('client_id', clientId);
-
+  const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
   const headers = {
-    'content-type': 'application/x-www-form-urlencoded'
+    'content-type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${clientSecret}`
   };
 
   const response = await fetch(
@@ -57,7 +54,7 @@ export async function refreshToken(session: any) {
   const { access_token, expires_in, id_token, refresh_token } = await response.json();
 
   const customerAccessToken = await exchangeAccessToken(access_token);
-  session = {
+  const newsession = {
     customer_authorization_code_token: access_token,
     expires_at: new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime(),
     id_token: id_token,
@@ -65,8 +62,9 @@ export async function refreshToken(session: any) {
     customer_access_token: customerAccessToken
   };
   try {
-    await auth.updateSessionAttributes(session.sessionId, session);
+    await auth.updateSessionAttributes(session.sessionId, newsession);
   } catch (e) {
+    console.log(e);
     // if (e instanceof LuciaError && e.message === `AUTH_INVALID_SESSION_ID`) {
     //   // invalid user id
     // }
@@ -114,3 +112,15 @@ async function exchangeAccessToken(access_token: string) {
   }
   return data.access_token;
 }
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
+  ]
+};
