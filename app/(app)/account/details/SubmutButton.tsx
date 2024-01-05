@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import LoadingDots from 'components/loading-dots';
+// @ts-ignore
 import { useFormStatus } from 'react-dom';
 
 export const SubmitButton = () => {
