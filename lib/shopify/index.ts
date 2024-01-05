@@ -140,7 +140,7 @@ export async function shopifyCustomerFetch<T>({
   } catch (error) {
     console.log(error);
   }
-  console.log(session);
+
   try {
     const result = await fetch(customerEndpoint, {
       method: 'POST',

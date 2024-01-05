@@ -23,7 +23,7 @@ export default async function DetailPage() {
   return (
     <div className="">
       <h1 className="mb-5 font-bold">ACCOUNT DETAILS</h1>
-      <form className="space-y-6" action={updateCustomerDetails}>
+      <form className="max-w-[384px] space-y-6" action={updateCustomerDetails}>
         <div className="flex flex-col">
           <label className="" htmlFor="email">
             {account?.emailAddress}
@@ -33,6 +33,7 @@ export default async function DetailPage() {
           <Input
             name="firstName"
             id="firstName"
+            className="px-2"
             placeholder="First Name"
             defaultValue={account?.firstName}
           />
@@ -41,6 +42,7 @@ export default async function DetailPage() {
           <Input
             name="lastName"
             id="lastName"
+            className="px-2"
             placeholder="Last Name"
             defaultValue={account?.lastName}
           />

@@ -176,11 +176,10 @@ export async function authenticateShopifyCode(code: string, state: string) {
   //     throw new Response('Nonce does not match', { status: 400 });
 
   const accessToken = await exchangeAccessToken(access_token);
-  console.log(accessToken);
+
   let customer;
   try {
     customer = await getCustomer({ accessToken });
-    console.log(customer);
   } catch (error) {
     console.log(error);
   }
