@@ -73,6 +73,7 @@ export async function startShopifyAuth() {
     'scope',
     'openid email https://api.customers.com/auth/customer.graphql'
   );
+  console.log(process.env.VERCEL_URL);
   authorizationRequestUrl.searchParams.append('client_id', clientId || '');
   authorizationRequestUrl.searchParams.append('response_type', 'code');
   authorizationRequestUrl.searchParams.append(
