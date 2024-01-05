@@ -74,16 +74,11 @@ export async function startShopifyAuth() {
     'openid email https://api.customers.com/auth/customer.graphql'
   );
   const headersList = headers();
-  const domain = headersList.get('host');
-  console.log(domain);
-  console.log(process.env.VERCEL_URL);
+  const domain = `https://${headersList.get('host')}`;
 
   authorizationRequestUrl.searchParams.append('client_id', clientId || '');
   authorizationRequestUrl.searchParams.append('response_type', 'code');
-  authorizationRequestUrl.searchParams.append(
-    'redirect_uri',
-    `${process.env.VERCEL_URL}/api/authorize` || ''
-  );
+  authorizationRequestUrl.searchParams.append('redirect_uri', `${domain}/api/authorize` || '');
 
   authorizationRequestUrl.searchParams.append('state', state);
   authorizationRequestUrl.searchParams.append('nonce', nonce);
@@ -97,16 +92,15 @@ export async function startShopifyAuth() {
 }
 
 export async function logoutShopify() {
+  const headersList = headers();
+  const domain = `https://${headersList.get('host')}`;
   const { id_token, sessionId } = await getPageSession();
 
   const authorizationRequestUrl = new URL(
-    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${id_token}&post_logout_redirect_uri=${process.env.VERCEL_URL}`
+    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${id_token}&post_logout_redirect_uri=${domain}`
   );
   authorizationRequestUrl.searchParams.append('id_token_hint', id_token);
-  authorizationRequestUrl.searchParams.append(
-    'post_logout_redirect_uri',
-    process.env.VERCEL_URL || ''
-  );
+  authorizationRequestUrl.searchParams.append('post_logout_redirect_uri', domain || '');
   await auth.invalidateSession(sessionId);
   // delete session cookie
   const authRequest = auth.handleRequest('GET', {
@@ -118,6 +112,8 @@ export async function logoutShopify() {
 }
 
 export async function authenticateShopifyCode(code: string, state: string) {
+  const headersList = headers();
+  const domain = `https://${headersList.get('host')}`;
   const storedState = cookies().get('shopify_oauth_state')?.value;
   const clientId = process.env.SHOPIFY_CLIENT_ID;
   const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
@@ -130,7 +126,7 @@ export async function authenticateShopifyCode(code: string, state: string) {
     });
   }
 
-  const origin = new URL(process.env.VERCEL_URL || ''); // In development this would resolve to the tunneled host or an Oxygen generated host.
+  const origin = new URL(domain || ''); // In development this would resolve to the tunneled host or an Oxygen generated host.
 
   const body = new URLSearchParams();
 
