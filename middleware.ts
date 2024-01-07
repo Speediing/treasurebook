@@ -59,7 +59,7 @@ export async function refreshToken(session: any) {
     expires_at: new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime(),
     id_token: id_token,
     refresh_token: refresh_token,
-    customer_access_token: customerAccessToken
+    accessToken: customerAccessToken
   };
   try {
     await auth.updateSessionAttributes(session.sessionId, newsession);
