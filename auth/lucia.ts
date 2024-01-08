@@ -1,6 +1,5 @@
 import { lucia } from 'lucia';
 import { nextjs_future } from 'lucia/middleware';
-// import 'lucia/polyfill/node';
 
 import { pg } from '@lucia-auth/adapter-postgresql';
 import { upstash } from '@lucia-auth/adapter-session-redis';
