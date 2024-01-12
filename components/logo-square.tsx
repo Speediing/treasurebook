@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import LogoIcon from './icons/logo';
 
 export default function LogoSquare({ size, logoUrl }: { size?: 'sm' | undefined; logoUrl: any }) {
@@ -13,10 +12,10 @@ export default function LogoSquare({ size, logoUrl }: { size?: 'sm' | undefined;
     // )}
     >
       <LogoIcon
-        className={clsx({
-          'h-[16px] w-[16px]': !size,
-          'h-[10px] w-[10px]': size === 'sm'
-        })}
+        // className={clsx({
+        //   'h-[16px] w-[16px]': !size,
+        //   'h-[10px] w-[10px]': size === 'sm'
+        // })}
         imageUrl={logoUrl}
       />
     </div>
