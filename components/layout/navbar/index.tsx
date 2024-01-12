@@ -34,7 +34,11 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          <Suspense fallback={<p className="pr-2 text-sm uppercase text-gray-600">Loading...</p>}>
+          <Suspense
+            fallback={
+              <p className="flex pr-2 text-sm uppercase text-gray-600 md:hidden">Loading...</p>
+            }
+          >
             <MobileAuthButton />
           </Suspense>
         </div>
@@ -80,7 +84,9 @@ export default async function Navbar() {
               </div>
               <Suspense
                 fallback={
-                  <p className="animate-pulse pr-2 text-sm uppercase text-gray-600">Loading</p>
+                  <p className="hidden animate-pulse pr-2 text-sm uppercase text-gray-600 md:flex">
+                    Loading
+                  </p>
                 }
               >
                 <DesktopAuthButton />
