@@ -14,8 +14,6 @@ import Search from './search';
 
 export default async function Navbar() {
   const { navOptions, logoUrl } = await getNavItemsSanity();
-  const account = await getAccountDetails();
-
   return (
     <nav className="relative flex items-center justify-between px-4 py-4 lg:px-6">
       {/* <div className="flex flex-row justify-between w-full md:hidden">
@@ -36,14 +34,8 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          <Suspense>
-            <MobileMenu
-              menu={
-                account?.emailAddress
-                  ? [...navOptions, { title: 'Account', path: '/account/details' }]
-                  : [...navOptions, { title: 'Login', path: '/account/details' }]
-              }
-            />
+          <Suspense fallback={<p className="pr-2 text-sm uppercase text-gray-600">Loading...</p>}>
+            <MobileAuthButton />
           </Suspense>
         </div>
         <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
@@ -86,17 +78,13 @@ export default async function Navbar() {
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </div>
-              <div className="pr-2 text-sm uppercase text-gray-600">
-                {account?.emailAddress ? (
-                  <Link href={'/account/details'}>
-                    {account?.firstName ? `${account?.firstName}` : 'ACCOUNT'}
-                  </Link>
-                ) : (
-                  <form action={startShopifyAuth}>
-                    <button type="submit">LOGIN</button>
-                  </form>
-                )}
-              </div>
+              <Suspense
+                fallback={
+                  <p className="animate-pulse pr-2 text-sm uppercase text-gray-600">Loading</p>
+                }
+              >
+                <DesktopAuthButton />
+              </Suspense>
             </div>
           </div>
 
@@ -108,3 +96,33 @@ export default async function Navbar() {
     </nav>
   );
 }
+const DesktopAuthButton = async () => {
+  const account = await getAccountDetails();
+  return (
+    <div className="pr-2 text-sm uppercase text-gray-600">
+      {account?.emailAddress ? (
+        <Link href={'/account/details'}>
+          {account?.firstName ? `${account?.firstName}` : 'ACCOUNT'}
+        </Link>
+      ) : (
+        <form action={startShopifyAuth}>
+          <button type="submit">LOGIN</button>
+        </form>
+      )}
+    </div>
+  );
+};
+
+const MobileAuthButton = async () => {
+  const { navOptions } = await getNavItemsSanity();
+  const account = await getAccountDetails();
+  return (
+    <MobileMenu
+      menu={
+        account?.emailAddress
+          ? [...navOptions, { title: 'Account', path: '/account/details' }]
+          : [...navOptions, { title: 'Login', path: '/account/details' }]
+      }
+    />
+  );
+};
