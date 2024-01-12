@@ -34,11 +34,7 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          <Suspense
-            fallback={
-              <p className="flex pr-2 text-sm uppercase text-gray-600 md:hidden">Loading...</p>
-            }
-          >
+          <Suspense>
             <MobileAuthButton />
           </Suspense>
         </div>
