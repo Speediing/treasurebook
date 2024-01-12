@@ -34,9 +34,9 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          <Suspense>
-            <MobileAuthButton />
-          </Suspense>
+          {/* <Suspense> */}
+          <MobileAuthButton />
+          {/* </Suspense> */}
         </div>
         <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (
