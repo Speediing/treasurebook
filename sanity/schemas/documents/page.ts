@@ -63,6 +63,10 @@ export default defineField({
         defineArrayMember({
           name: 'Biography',
           type: 'biography'
+        }),
+        defineArrayMember({
+          name: 'Video Header',
+          type: 'videoHeader'
         })
       ]
     })

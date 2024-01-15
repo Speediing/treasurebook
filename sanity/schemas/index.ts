@@ -84,6 +84,7 @@ import collectionGroup from './objects/collection/group';
 import collectionLinks from './objects/collection/links';
 import fullWidthImage from './objects/fullWidthImage';
 import splitSmallText from './objects/splitSmallText';
+import videoBlog from './objects/video';
 
 const objects = [
   customProductOptionColor,
@@ -135,7 +136,8 @@ const objects = [
   shopifyProductVariant,
   collectionGroup,
   collectionLinks,
-  biography
+  biography,
+  videoBlog
 ];
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents];
