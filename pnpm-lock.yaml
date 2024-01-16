@@ -44,7 +44,7 @@ specifiers:
   groq: ^3.23.2
   lint-staged: ^13.2.3
   lodash.get: ^4.4.2
-  lucia: latest
+  lucia: '2.6'
   next: canary
   next-sanity: '5'
   pluralize-esm: ^9.0.3
@@ -68,9 +68,9 @@ specifiers:
 dependencies:
   '@headlessui/react': 1.7.17_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.1.1_react@18.2.0
-  '@lucia-auth/adapter-postgresql': 2.0.2_lucia@2.7.6
-  '@lucia-auth/adapter-session-redis': 2.1.2_lucia@2.7.6
-  '@lucia-auth/oauth': 3.5.1_lucia@2.7.6
+  '@lucia-auth/adapter-postgresql': 2.0.2_lucia@2.6.0
+  '@lucia-auth/adapter-session-redis': 2.1.2_lucia@2.6.0
+  '@lucia-auth/oauth': 3.5.1_lucia@2.6.0
   '@mux/mux-player-react': 2.3.1_pykdanru7vtvy3sxrufrizyr6q
   '@portabletext/react': 3.0.11_react@18.2.0
   '@portabletext/types': 2.0.8
@@ -94,7 +94,7 @@ dependencies:
   embla-carousel-react: 8.0.0-rc17_react@18.2.0
   groq: 3.23.4
   lodash.get: 4.4.2
-  lucia: 2.7.6
+  lucia: 2.6.0
   next: 14.0.5-canary.59_biqbaboplfbrettd7655fr4n2y
   next-sanity: 5.5.11_opx264jsjyy52zx5etrlk7urge
   pluralize-esm: 9.0.5
@@ -1219,7 +1219,7 @@ packages:
       '@lezer/common': 1.2.0
     dev: false
 
-  /@lucia-auth/adapter-postgresql/2.0.2_lucia@2.7.6:
+  /@lucia-auth/adapter-postgresql/2.0.2_lucia@2.6.0:
     resolution: {integrity: sha512-gQ7SlFu+gxQj2IX2J8ZVivcLBbdnf9SbNQOVWkJxZOdY1uaaIQGeNfEDld2Awy02VrXmA4sjHsbkJx1JPVw2+A==}
     peerDependencies:
       lucia: ^2.0.0
@@ -1229,14 +1229,14 @@ packages:
       postgres:
         optional: true
     dependencies:
-      lucia: 2.7.6
+      lucia: 2.6.0
       pg: 8.11.3
       postgres: 3.4.3
     transitivePeerDependencies:
       - pg-native
     dev: false
 
-  /@lucia-auth/adapter-session-redis/2.1.2_lucia@2.7.6:
+  /@lucia-auth/adapter-session-redis/2.1.2_lucia@2.6.0:
     resolution: {integrity: sha512-Rjyti3BR2RLXs5qy2H9AolHPSt8qHV3ejjSYghr3TNp3Z/mhkA1+8EpXkLCHCeZ17xJ6z41c3aGdXwwOuFrMmA==}
     peerDependencies:
       '@upstash/redis': ^1.20.0
@@ -1251,15 +1251,15 @@ packages:
       redis:
         optional: true
     dependencies:
-      lucia: 2.7.6
+      lucia: 2.6.0
     dev: false
 
-  /@lucia-auth/oauth/3.5.1_lucia@2.7.6:
+  /@lucia-auth/oauth/3.5.1_lucia@2.6.0:
     resolution: {integrity: sha512-GEohSpTt7M8LQgmA+wFuoq/Pb8afos4kZlFXTmmn8n+hUnV/40dEP0C4X735PbMo+QW9JIFkOggTfHDhB60XhA==}
     peerDependencies:
       lucia: ^2.0.0
     dependencies:
-      lucia: 2.7.6
+      lucia: 2.6.0
     dev: false
 
   /@motionone/animation/10.16.3:
@@ -6013,8 +6013,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucia/2.7.6:
-    resolution: {integrity: sha512-xyRkNtevf0DUM4nGC6F2nCFFNphZ1qqBrfWwAgPa9zkpQsVJ/hN32I8zAY+pm+ZKWPPS/C/Sqqmo2LreSCzg7w==}
+  /lucia/2.6.0:
+    resolution: {integrity: sha512-9GfRmEkhJ68EMAEOI6EKwnkHmQpEXeqRuP9ew+UhuZEmTCHrsTqwJ9f6pffEg7Im3BRBPlBlWzH5pxtjI+9OXQ==}
     dev: false
 
   /make-dir/3.1.0:

@@ -50,7 +50,7 @@
     "embla-carousel-react": "8.0.0-rc17",
     "groq": "^3.23.2",
     "lodash.get": "^4.4.2",
-    "lucia": "latest",
+    "lucia": "2.6",
     "next": "canary",
     "next-sanity": "5",
     "pluralize-esm": "^9.0.3",
