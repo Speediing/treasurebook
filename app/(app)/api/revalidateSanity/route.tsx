@@ -4,10 +4,10 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
-    const { isValidSignature, body } = await parseBody<{ _type }>(
+    const { isValidSignature, body } = (await parseBody<{ _type }>(
       req,
       process.env.SANITY_REVALIDATE_SECRET
-    );
+    )) as any;
 
     if (!isValidSignature) {
       const message = 'Invalid signature';
@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
     }
 
     if (!body?._type) {
-      const message = 'Bad Request';
-      return new Response({ message, body }, { status: 400 });
+      const message: any = 'Bad Request';
+      return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
     console.log(body);
     // If the `_type` is `testimonial`, then all `client.fetch` calls with
@@ -24,8 +24,8 @@ export async function POST(req: NextRequest) {
     await revalidateTag(body._type);
 
     return NextResponse.json({ body });
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
-    return new Response(err.message, { status: 500 });
+    return new Response(JSON.stringify(err.message), { status: 500 });
   }
 }
