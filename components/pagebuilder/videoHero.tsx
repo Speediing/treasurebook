@@ -7,7 +7,7 @@ export const VideoHero = ({ module }: { module: any }) => {
   console.log(module);
 
   return (
-    <div className="relative flex h-[calc(100vh-76px)] min-h-full w-full flex-col justify-center align-middle text-white md:h-[calc(100vh-91px)]">
+    <div className="relative flex h-[calc(100svh-76px)] min-h-full w-full flex-col justify-center align-middle text-white md:h-[calc(100vh-91px)]">
       <MuxPlayer
         autoPlay={'muted'}
         loop={true}
