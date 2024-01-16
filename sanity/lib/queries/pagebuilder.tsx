@@ -18,6 +18,11 @@ export const getPageBuilder = async (slug: string) => {
       _type,
   leftItems,
     rightItems
+    }, (_type == "Biography") => {
+      _type,
+      body,
+  image,
+    title
     },
     }
   }`
