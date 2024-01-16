@@ -30,13 +30,13 @@ import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array';
 import { media, mediaAssetSource } from 'sanity-plugin-media';
+import { muxInput } from 'sanity-plugin-mux-input';
 // @ts-ignore
 import { deskTool } from 'sanity/desk';
 import { structure } from './sanity/desk';
 import { dataset, projectId } from './sanity/env';
 import { customDocumentActions } from './sanity/plugins/customDocumentActions';
 import { schema } from './sanity/schema';
-
 const devOnlyPlugins = [visionTool()];
 
 export default defineConfig({
@@ -49,6 +49,7 @@ export default defineConfig({
   plugins: [
     deskTool({ structure }),
     colorInput(),
+    muxInput(),
     imageHotspotArrayPlugin(),
     customDocumentActions(),
     media(),

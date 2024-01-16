@@ -1,5 +1,5 @@
 'use server';
-import { auth } from 'auth/lucia';
+import { auth } from 'auth/luciafile';
 import { getCustomer } from 'lib/shopify';
 import * as context from 'next/headers';
 import { cookies, headers } from 'next/headers';

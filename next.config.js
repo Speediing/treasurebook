@@ -7,6 +7,11 @@ module.exports = {
   experimental: {
     // ppr: true
   },
+  logging: {
+    fetches: {
+      fullUrl: true
+    }
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [

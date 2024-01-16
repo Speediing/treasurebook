@@ -1,6 +1,6 @@
 import * as context from 'next/headers';
 import React from 'react';
-import { auth } from './lucia';
+import { auth } from './luciafile';
 
 export const getPageSession = React.cache(() => {
   const authRequest = auth.handleRequest('GET', context);
