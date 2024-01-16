@@ -1,4 +1,4 @@
-import { auth } from 'auth/lucia';
+import { auth } from 'auth/luciafile';
 
 // import { refreshToken } from 'auth/shopify';
 import * as context from 'next/headers';

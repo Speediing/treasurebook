@@ -12,8 +12,6 @@ module.exports = {
       fullUrl: true
     }
   },
-
-  serverComponentsExternalPackages: ['lucia'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
