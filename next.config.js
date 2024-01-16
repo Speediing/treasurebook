@@ -12,7 +12,8 @@ module.exports = {
       fullUrl: true
     }
   },
-  transpilePackages: ['lucia'],
+
+  serverComponentsExternalPackages: ['lucia'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
