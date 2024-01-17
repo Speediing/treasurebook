@@ -4,6 +4,7 @@ export const metadata = {
     type: 'website'
   }
 };
+export const runtime = 'edge';
 export default async function AccountPage() {
   return <div>orders</div>;
 }
