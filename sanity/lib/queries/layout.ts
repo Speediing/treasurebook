@@ -30,7 +30,7 @@ export const LAYOUT_QUERY = groq`
 export const getNavItemsSanity = async () => {
   let nav;
   try {
-    nav = await client.fetch(LAYOUT_QUERY);
+    nav = await client.fetch(LAYOUT_QUERY, { tags: ['settings'] });
   } catch (error) {
     console.log(error);
   }
@@ -44,7 +44,6 @@ export const getNavItemsSanity = async () => {
 
 export const FOOTER_QUERY = groq`
   *[_type == 'settings'] | order(_updatedAt desc) [0] {
-
     footer {
         links[] {
           ${LINKS}
@@ -59,7 +58,7 @@ export const FOOTER_QUERY = groq`
 export const getNavFooterSanity = async () => {
   let nav;
   try {
-    nav = await client.fetch(FOOTER_QUERY);
+    nav = await client.fetch(FOOTER_QUERY, { tags: ['settings'] });
   } catch (error) {
     console.log(error);
   }

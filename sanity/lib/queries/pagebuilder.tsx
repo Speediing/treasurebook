@@ -25,7 +25,8 @@ export const getPageBuilder = async (slug: string) => {
     title
     },
     }
-  }`
+  }`,
+    { tags: [`page-${slug}`] }
   );
 
   const pageContent = content[0].pageBuilder;
