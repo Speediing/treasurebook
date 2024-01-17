@@ -25,6 +25,7 @@ export const getProductSanity = async (handle: string) => {
     ${PRODUCT_PAGE}
   }
 `;
+  console.log('tag', `product-${handle}`);
   const product = await client.fetch(PRODUCT_PAGE_QUERY, { tags: [`product-${handle}`] });
   return product;
 };
