@@ -5,7 +5,9 @@ import { revalidateTag } from 'next/cache';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getPageSession } from 'auth/session';
+import { auth } from 'auth/luciafile';
+import * as context from 'next/headers';
+import React from 'react';
 import {
   addToCartMutation,
   createCartMutation,
@@ -53,7 +55,6 @@ import {
   ShopifyRemoveFromCartOperation,
   ShopifyUpdateCartOperation
 } from './types';
-
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
   : '';
@@ -62,7 +63,10 @@ const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
 const customerEndpoint = `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/account/customer/api/unstable/graphql`;
 
 type ExtractVariables<T> = T extends { variables: object } ? T['variables'] : never;
-
+export const getPageSession = React.cache(() => {
+  const authRequest = auth.handleRequest('GET', context);
+  return authRequest.validate();
+});
 export async function shopifyFetch<T>({
   cache = 'force-cache',
   headers,

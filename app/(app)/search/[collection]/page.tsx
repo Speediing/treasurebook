@@ -14,7 +14,7 @@ export async function generateMetadata({
     description: ''
   };
 }
-
+export const runtime = 'edge';
 export default async function CategoryPage({
   params,
   searchParams
