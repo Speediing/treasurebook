@@ -9,7 +9,7 @@ export const metadata = {
     type: 'website'
   }
 };
-
+//test
 const updateCustomerDetails = async (data: FormData) => {
   'use server';
   const firstName = data.get('firstName')?.toString();
