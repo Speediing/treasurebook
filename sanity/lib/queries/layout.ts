@@ -30,7 +30,7 @@ export const LAYOUT_QUERY = groq`
 export const getNavItemsSanity = async () => {
   let nav;
   try {
-    nav = await client.fetch(LAYOUT_QUERY, { tags: ['settings'] });
+    nav = await client.fetch(LAYOUT_QUERY, { cache: 'force-cache', tags: ['settings'] });
   } catch (error) {
     console.log(error);
   }
@@ -58,7 +58,7 @@ export const FOOTER_QUERY = groq`
 export const getNavFooterSanity = async () => {
   let nav;
   try {
-    nav = await client.fetch(FOOTER_QUERY, { tags: ['settings'] });
+    nav = await client.fetch(FOOTER_QUERY, { cache: 'force-cache', tags: ['settings'] });
   } catch (error) {
     console.log(error);
   }
