@@ -22,10 +22,13 @@ export async function POST(req: NextRequest) {
     // If the `_type` is `testimonial`, then all `client.fetch` calls with
     // `{next: {tags: ['testimonial']}}` will be revalidated
     if (body._type === 'page') {
+      console.log(`${body.type}-${body.slug.current}`);
       revalidateTag(`${body.type}-${body.slug.current}`);
     } else if (body._type === 'product') {
+      console.log(`${body.type}-${body.store.slug.current}`);
       revalidateTag(`${body.type}-${body.store.slug.current}`);
     } else {
+      console.log(`${body.type}`);
       await revalidateTag(body._type);
     }
     return NextResponse.json({ body });
