@@ -1,11 +1,11 @@
-import { auth } from 'auth/luciafile';
 import { HIDDEN_PRODUCT_TAG, SHOPIFY_GRAPHQL_API_ENDPOINT, TAGS } from 'lib/constants';
 import { isShopifyError } from 'lib/type-guards';
 import { ensureStartsWith } from 'lib/utils';
 import { revalidateTag } from 'next/cache';
-import * as context from 'next/headers';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { getPageSession } from 'auth/session';
 import {
   addToCartMutation,
   createCartMutation,
@@ -136,8 +136,7 @@ export async function shopifyCustomerFetch<T>({
 }): Promise<{ status: number; body: T } | never> {
   let session;
   try {
-    const authRequest = auth.handleRequest('GET', context);
-    session = authRequest.validate();
+    session = await getPageSession();
   } catch (error) {
     console.log(error);
   }
