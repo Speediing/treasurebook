@@ -532,7 +532,7 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   const isCollectionUpdate = collectionWebhooks.includes(topic);
   const isProductUpdate = productWebhooks.includes(topic);
 
-  if (!secret || secret !== process.env.SHOPIFY_REVALIDATION_SECRET) {
+  if (!secret || secret !== process.env.SANITY_REVALIDATE_SECRET) {
     console.error('Invalid revalidation secret.');
     return NextResponse.json({ status: 200 });
   }
