@@ -543,10 +543,12 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   }
 
   if (isCollectionUpdate) {
+    await new Promise((r) => setTimeout(r, 3000));
     revalidateTag(TAGS.collections);
   }
 
   if (isProductUpdate) {
+    await new Promise((r) => setTimeout(r, 3000));
     revalidateTag(TAGS.products);
   }
 
