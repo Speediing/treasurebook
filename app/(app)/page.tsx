@@ -6,7 +6,9 @@ export const metadata = {
     type: 'website'
   }
 };
+
 export const runtime = 'edge';
 export default async function HomePage() {
+  console.log('???');
   return <PageBuilder slug={'home'} />;
 }
