@@ -26,6 +26,7 @@ export const getPageBuilder = async (slug: string) => {
     },
     }
   }`,
+    {},
     { cache: 'force-cache', next: { tags: [`page-${slug}`] } }
   );
 

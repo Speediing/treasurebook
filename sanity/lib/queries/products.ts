@@ -26,9 +26,13 @@ export const getProductSanity = async (handle: string) => {
   }
 `;
   console.log('tag', `product-${handle}`);
-  const product = await client.fetch(PRODUCT_PAGE_QUERY, {
-    cache: 'force-cache',
-    next: { tags: [`product-${handle}`] }
-  });
+  const product = await client.fetch(
+    PRODUCT_PAGE_QUERY,
+    {},
+    {
+      cache: 'force-cache',
+      next: { tags: [`product-${handle}`] }
+    }
+  );
   return product;
 };
