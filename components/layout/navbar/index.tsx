@@ -35,7 +35,7 @@ export default async function Navbar() {
         </div>
         <div className={'flex md:hidden'}>
           {/* <Suspense> */}
-          <MobileAuthButton />
+          {/* <MobileAuthButton /> */}
           {/* </Suspense> */}
         </div>
         <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
@@ -85,7 +85,7 @@ export default async function Navbar() {
                   </p>
                 }
               >
-                <DesktopAuthButton />
+                {/* <DesktopAuthButton /> */}
               </Suspense>
             </div>
           </div>
