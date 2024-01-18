@@ -1,4 +1,4 @@
-import { Bars3Icon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { getAccountDetails } from 'app/(app)/account/details/data';
 import { startShopifyAuth } from 'auth/shopify';
@@ -114,7 +114,15 @@ export default async function Navbar() {
             </div>
           </div>
 
-          <Suspense>
+          <Suspense
+            fallback={
+              <div className="relative flex h-11 w-11 items-center justify-center rounded-none text-black transition-colors md:h-[38px]  md:w-[38px] md:border ">
+                <ShoppingCartIcon
+                  className={clsx('h-4 transition-all ease-in-out hover:scale-110 ')}
+                />
+              </div>
+            }
+          >
             <Cart />
           </Suspense>
         </div>
