@@ -1,5 +1,4 @@
-import { Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { getAccountDetails } from 'app/(app)/account/details/data';
 import { startShopifyAuth } from 'auth/shopify';
 import clsx from 'clsx';
