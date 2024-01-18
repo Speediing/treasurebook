@@ -1,15 +1,15 @@
+import { Bars3Icon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { getAccountDetails } from 'app/(app)/account/details/data';
+import { startShopifyAuth } from 'auth/shopify';
+import clsx from 'clsx';
 import Cart from 'components/cart';
-import OpenCart from 'components/cart/open-cart';
 import LogoSquare from 'components/logo-square';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { getNavItemsSanity } from '../../../sanity/lib/queries/layout';
 import MobileMenu from './mobile-menu';
-import { Bars3Icon } from '@heroicons/react/24/outline';
-import { getAccountDetails } from 'app/(app)/account/details/data';
-import { startShopifyAuth } from 'auth/shopify';
-import clsx from 'clsx';
 import Search from './search';
 
 export default async function Navbar() {
@@ -64,7 +64,22 @@ export default async function Navbar() {
         </Link>
         <div className="flex justify-end gap-4 md:w-1/3">
           <div className={'hidden md:flex'}>
-            <Suspense fallback={<OpenCart />}>
+            <Suspense
+              fallback={
+                <div className="relative  md:w-[250px] ">
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Search for products..."
+                    autoComplete="off"
+                    className="w-full rounded-none border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
+                  />
+                  <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
+                    <MagnifyingGlassIcon className="h-4" />
+                  </div>
+                </div>
+              }
+            >
               <Search />
             </Suspense>
           </div>
