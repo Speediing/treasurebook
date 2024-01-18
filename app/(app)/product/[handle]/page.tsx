@@ -13,7 +13,7 @@ import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
 import { urlForImage } from '../../../../sanity/lib/image';
 import { getProductSanity } from '../../../../sanity/lib/queries/products';
-export const runtime = 'edge';
+// export const runtime = 'edge';
 export async function generateMetadata({
   params
 }: {

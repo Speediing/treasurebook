@@ -7,7 +7,7 @@ export const metadata = {
   }
 };
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 export default async function HomePage() {
   return <PageBuilder slug={'home'} />;
 }
