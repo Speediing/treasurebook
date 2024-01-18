@@ -85,7 +85,7 @@ export default async function Navbar() {
                   </p>
                 }
               >
-                {/* <DesktopAuthButton /> */}
+                <DesktopAuthButton />
               </Suspense>
             </div>
           </div>
