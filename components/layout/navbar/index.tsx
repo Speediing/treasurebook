@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { getNavItemsSanity } from '../../../sanity/lib/queries/layout';
 import MobileMenu from './mobile-menu';
-
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import { getAccountDetails } from 'app/(app)/account/details/data';
 import { startShopifyAuth } from 'auth/shopify';
 import clsx from 'clsx';
@@ -34,9 +34,18 @@ export default async function Navbar() {
           </Link>
         </div>
         <div className={'flex md:hidden'}>
-          {/* <Suspense> */}
-          <MobileAuthButton />
-          {/* </Suspense> */}
+          <Suspense
+            fallback={
+              <button
+                aria-label="Open mobile menu"
+                className="flex h-11 w-11 items-center justify-center rounded-none text-black transition-colors dark:text-white md:hidden"
+              >
+                <Bars3Icon className="h-4" />
+              </button>
+            }
+          >
+            <MobileAuthButton />
+          </Suspense>
         </div>
         <div className="hi hidden flex-row justify-center gap-6 md:flex md:w-1/3">
           {navOptions.map((item: any) => (
