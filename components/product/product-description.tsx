@@ -6,8 +6,8 @@ import { VariantSelector } from './variant-selector';
 export function ProductDescription({ product }: { product: Product }) {
   return (
     <>
-      <div className="mx-auto max-w-sm py-10">
-        <h1 className="mb-1 text-3xl font-bold">STEPHEN J - {product.title}</h1>
+      <div className="mx-auto ml-0 max-w-lg md:px-0">
+        <h1 className="mb-1 text-3xl font-bold">{product.title}</h1>
 
         <Price
           amount={product.priceRange.maxVariantPrice.amount}

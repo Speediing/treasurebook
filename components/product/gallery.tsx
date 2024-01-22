@@ -1,7 +1,6 @@
 'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React from 'react';
@@ -15,15 +14,11 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
   const nextSearchParams = new URLSearchParams(searchParams.toString());
   const nextImageIndex = imageIndex + 1 < images.length ? imageIndex + 1 : 0;
   nextSearchParams.set('image', nextImageIndex.toString());
-  const nextUrl = createUrl(pathname, nextSearchParams);
 
   const previousSearchParams = new URLSearchParams(searchParams.toString());
   const previousImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
   previousSearchParams.set('image', previousImageIndex.toString());
-  const previousUrl = createUrl(pathname, previousSearchParams);
 
-  const buttonClassName =
-    'h-full px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center';
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -40,8 +35,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-  console.log(count);
-  console.log(current);
+
   return (
     <>
       <div className="hidden h-fit w-full flex-col justify-start gap-4 lg:flex">
@@ -49,9 +43,9 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
           return (
             <div key={x.src} className="flex flex-row justify-center">
               <Image
-                className=" w-full max-w-[550px] object-contain"
-                width={550}
-                height={550}
+                className="w-full object-contain "
+                width={800}
+                height={800}
                 sizes="(min-width: 1024px) 66vw, 100vw"
                 alt={x.altText as string}
                 src={x.src as string}
@@ -61,21 +55,21 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
           );
         })}
       </div>
-      <div className="flex flex-col lg:hidden">
-        <div className="flex flex-row justify-center">
+      <div className="flex max-h-[353px] min-h-[200px] flex-col lg:hidden">
+        <div className="flex aspect-square w-full flex-row justify-center">
           <Carousel
             setApi={setApi}
-            className="flex aspect-square w-full max-w-xs justify-center lg:hidden"
+            className="min-w-screen absolute flex h-fit max-h-[350px] justify-center lg:hidden"
           >
-            <CarouselContent className="">
+            <CarouselContent className="min-w-screen max-h-[353px]  w-full">
               {images.map((x) => {
                 return (
                   <CarouselItem key={x.src}>
-                    <div className="p-1 py-2">
+                    <div className="w-full">
                       <Card>
-                        <CardContent className="flex aspect-square items-center justify-center p-0">
+                        <CardContent className="flex w-full items-center justify-center p-0 ">
                           <Image
-                            className=" w-full max-w-[550px] object-contain"
+                            className="min-w-screen object-contain "
                             width={550}
                             height={550}
                             sizes="(min-width: 1024px) 66vw, 100vw"
@@ -91,16 +85,20 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
               })}
             </CarouselContent>
           </Carousel>
-        </div>
-        <div className="flex h-1 w-full flex-row justify-between gap-2 bg-white px-1">
-          {images.map((x, i) => {
-            return (
-              <div
-                className={`w-full ${current - 1 === i ? 'bg-black' : 'bg-white'}`}
-                key={x.src}
-              ></div>
-            );
-          })}
+          <div className="z-10 flex max-h-[353px] flex-col justify-end pb-4">
+            <div className="flex h-1 w-full flex-row justify-center gap-2 bg-transparent ">
+              {images.map((x, i) => {
+                return (
+                  <div
+                    className={`h-1 w-1 rounded-full ${
+                      current - 1 === i ? 'bg-white' : 'bg-white opacity-50'
+                    }`}
+                    key={x.src}
+                  ></div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </>
