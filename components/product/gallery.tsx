@@ -55,13 +55,13 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
           );
         })}
       </div>
-      <div className="flex max-h-[353px] min-h-[200px] flex-col lg:hidden">
+      <div className="flex max-h-[423px] min-h-[200px] flex-col lg:hidden">
         <div className="flex aspect-square w-full flex-row justify-center">
           <Carousel
             setApi={setApi}
-            className="min-w-screen absolute flex h-fit max-h-[350px] justify-center lg:hidden"
+            className="min-w-screen absolute flex h-fit max-h-[423px] justify-center lg:hidden"
           >
-            <CarouselContent className="min-w-screen max-h-[353px]  w-full">
+            <CarouselContent className="min-w-screen max-h-[423px]  w-full">
               {images.map((x) => {
                 return (
                   <CarouselItem key={x.src}>
@@ -69,7 +69,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                       <Card>
                         <CardContent className="flex w-full items-center justify-center p-0 ">
                           <Image
-                            className="min-w-screen object-contain "
+                            className="min-w-screen aspect-square object-cover"
                             width={550}
                             height={550}
                             sizes="(min-width: 1024px) 66vw, 100vw"
@@ -85,7 +85,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
               })}
             </CarouselContent>
           </Carousel>
-          <div className="z-10 flex max-h-[353px] flex-col justify-end pb-4">
+          <div className="z-10 flex max-h-[423px] flex-col justify-end pb-4">
             <div className="flex h-1 w-full flex-row justify-center gap-2 bg-transparent ">
               {images.map((x, i) => {
                 return (

@@ -7,13 +7,13 @@ export function ProductDescription({ product }: { product: Product }) {
   return (
     <>
       <div className="mx-auto ml-0 max-w-lg md:px-0">
-        <h1 className="mb-1 text-3xl font-bold">{product.title}</h1>
+        <h1 className="mb-1 text-xl font-bold md:text-2xl">{product.title}</h1>
 
         <Price
           amount={product.priceRange.maxVariantPrice.amount}
           currencyCode={product.priceRange.maxVariantPrice.currencyCode}
         />
-        <div className="mt-8 flex items-center justify-between border-b py-4">
+        <div className="mt-4 flex items-center justify-between border-b py-4 md:mt-8">
           <span className="text-lg font-medium">Quantity</span>
           <div className="flex items-center">
             <Button className="px-4 py-2">-</Button>
