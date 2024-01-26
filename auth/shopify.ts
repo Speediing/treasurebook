@@ -1,10 +1,11 @@
 'use server';
-import { auth } from 'auth/luciafile';
+import { getIronSession } from 'iron-session';
 import { getCustomer } from 'lib/shopify';
 import * as context from 'next/headers';
 import { cookies, headers } from 'next/headers';
 import { RedirectType, redirect } from 'next/navigation';
-import { getPageSession } from './session';
+import { getNewPageSession } from './session';
+
 async function exchangeAccessToken(access_token: string) {
   const body = new URLSearchParams();
   const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
@@ -94,20 +95,17 @@ export async function startShopifyAuth() {
 export async function logoutShopify() {
   const headersList = headers();
   const domain = `https://${headersList.get('host')}`;
-  const { id_token, sessionId } = await getPageSession();
+  // const { id_token, sessionId } = await getNewPageSession();
+  const session = await getNewPageSession();
 
   const authorizationRequestUrl = new URL(
-    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${id_token}&post_logout_redirect_uri=${domain}`
+    `https://shopify.com/${process.env.SHOPIFY_SHOP_ID}/auth/logout?id_token_hint=${session.id_token}&post_logout_redirect_uri=${domain}`
   );
-  authorizationRequestUrl.searchParams.append('id_token_hint', id_token);
+  authorizationRequestUrl.searchParams.append('id_token_hint', session.id_token);
   authorizationRequestUrl.searchParams.append('post_logout_redirect_uri', domain || '');
-  await auth.invalidateSession(sessionId);
+
   // delete session cookie
-  const authRequest = auth.handleRequest('GET', {
-    cookies,
-    headers
-  });
-  authRequest.setSession(null);
+  await session.destroy();
   return redirect(authorizationRequestUrl.toString(), RedirectType.replace);
 }
 
@@ -181,43 +179,27 @@ export async function authenticateShopifyCode(code: string, state: string) {
   try {
     customer = await getCustomer({ accessToken });
   } catch (error) {
+    console.log('????');
     console.log(error);
   }
 
-  let user;
-  let createdUser = false;
-  try {
-    user = await auth.createUser({
-      key: {
-        providerId: 'shopify',
-        providerUserId: customer.emailAddress,
-        password: null
-      },
-      attributes: {}
-    });
-    createdUser = true;
-  } catch (error) {
-    user = await auth.getKey('shopify', customer.emailAddress);
-    console.log(error);
-  }
+  // const createdUser = false;
+  const session: any = await getIronSession(context.cookies(), {
+    password: process.env.SESSION_KEY || '',
+    cookieName: 'shopSession'
+  });
 
-  const session = await auth.createSession({
-    userId: user.userId,
-    attributes: {
-      customer_authorization_code_token: access_token,
-      expires_at: new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime(),
-      id_token: id_token,
-      refresh_token: refresh_token,
-      accessToken: accessToken
-    }
-  });
-  const authRequest = auth.handleRequest('GET', {
-    cookies,
-    headers
-  });
-  authRequest.setSession(session);
-  if (createdUser) {
-    return redirect('/account/details', RedirectType.replace);
-  }
-  return redirect('/', RedirectType.replace);
+  session.customer_authorization_code_token = access_token;
+
+  session.expires_at = new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime();
+  session.id_token = id_token;
+  session.refresh_token = refresh_token;
+  session.accessToken = accessToken;
+  session.emailAddress = customer.emailAddress;
+  console.log(session);
+  await session.save();
+  // if (createdUser) {
+  return redirect('/account/details', RedirectType.replace);
+  // }
+  // return redirect('/', RedirectType.replace);
 }

@@ -8,6 +8,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from 'auth/luciafile';
 import * as context from 'next/headers';
 import React from 'react';
+
+import { getIronSession } from 'iron-session';
 import {
   addToCartMutation,
   createCartMutation,
@@ -138,13 +140,11 @@ export async function shopifyCustomerFetch<T>({
   variables?: ExtractVariables<T>;
   accessToken?: string;
 }): Promise<{ status: number; body: T } | never> {
-  let session;
-  try {
-    session = await getPageSession();
-  } catch (error) {
-    console.log(error);
-  }
-
+  const session: any = await getIronSession(context.cookies(), {
+    password: process.env.SESSION_KEY || '',
+    cookieName: 'shopSession'
+  });
+  console.log('HERE', session.accessToken);
   try {
     const result = await fetch(customerEndpoint, {
       method: 'POST',
