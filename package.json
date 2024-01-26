@@ -15,7 +15,7 @@
     "test": "pnpm lint && pnpm prettier:check"
   },
   "git": {
-    "pre-commit": "lint-staged"
+   
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
@@ -23,9 +23,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
-    "@lucia-auth/adapter-postgresql": "^2.0.2",
-    "@lucia-auth/adapter-session-redis": "^2.1.2",
-    "@lucia-auth/oauth": "latest",
+
     "@mux/mux-player-react": "^2.3.1",
     "@portabletext/react": "^3.0.9",
     "@portabletext/types": "^2.0.2",
@@ -49,8 +47,8 @@
     "drizzle-orm": "^0.29.2",
     "embla-carousel-react": "8.0.0-rc17",
     "groq": "^3.23.2",
+    "iron-session": "^8.0.1",
     "lodash.get": "^4.4.2",
-    "lucia": "latest",
     "next": "canary",
     "next-sanity": "5",
     "pluralize-esm": "^9.0.3",

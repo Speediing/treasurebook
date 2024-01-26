@@ -1,14 +1,18 @@
-import { auth } from 'auth/luciafile';
-
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
 // import { refreshToken } from 'auth/shopify';
-import * as context from 'next/headers';
-import type { NextRequest } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest) {
-  const authRequest = auth.handleRequest('GET', context);
-  const session = await authRequest.validate();
+export async function middleware() {
+  const session = await getNewPageSession();
+}
 
+const getNewPageSession = async () => {
+  const session: any = await getIronSession(cookies(), {
+    password: process.env.SESSION_KEY || '',
+    cookieName: 'shopSession'
+  });
+  console.log(session);
   if (session?.expires_at < new Date().getTime()) {
     console.log('expired');
     try {
@@ -17,7 +21,9 @@ export async function middleware(request: NextRequest) {
       console.log(error);
     }
   }
-}
+  return session;
+};
+
 export async function refreshToken(session: any) {
   const clientId = process.env.SHOPIFY_CLIENT_ID || '';
 
@@ -54,15 +60,14 @@ export async function refreshToken(session: any) {
   const { access_token, expires_in, id_token, refresh_token } = await response.json();
 
   const customerAccessToken = await exchangeAccessToken(access_token);
-  const newsession = {
-    customer_authorization_code_token: access_token,
-    expires_at: new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime(),
-    id_token: id_token,
-    refresh_token: refresh_token,
-    accessToken: customerAccessToken
-  };
+
   try {
-    await auth.updateSessionAttributes(session.sessionId, newsession);
+    session.customer_authorization_code_token = access_token;
+    session.expires_at = new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime();
+    session.id_token = id_token;
+    session.refresh_token = refresh_token;
+    session.accessToken = customerAccessToken;
+    session.save();
   } catch (e) {
     console.log(e);
     // if (e instanceof LuciaError && e.message === `AUTH_INVALID_SESSION_ID`) {
@@ -112,6 +117,7 @@ async function exchangeAccessToken(access_token: string) {
   }
   return data.access_token;
 }
+
 export const config = {
   matcher: [
     /*
