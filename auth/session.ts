@@ -62,7 +62,6 @@ export async function refreshToken(session: any) {
     session.id_token = id_token;
     session.refresh_token = refresh_token;
     session.accessToken = customerAccessToken;
-    session.emailAddress = customer?.emailAddress;
     session.save();
   } catch (e) {
     console.log(e);
