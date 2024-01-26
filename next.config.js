@@ -5,8 +5,8 @@ module.exports = {
     ignoreDuringBuilds: true
   },
   experimental: {
-    ppr: true,
-    instrumentationHook: true
+    ppr: true
+    // instrumentationHook: true
   },
   logging: {
     fetches: {
