@@ -7,7 +7,7 @@ export const metadata = {
   title: 'Search',
   description: 'Search for products in the store.'
 };
-// export const runtime = 'edge';
+export const runtime = 'edge';
 export default async function SearchPage({
   searchParams
 }: {
