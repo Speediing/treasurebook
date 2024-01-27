@@ -13,7 +13,7 @@ import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
 import { urlForImage } from '../../../../sanity/lib/image';
 import { getProductSanity } from '../../../../sanity/lib/queries/products';
-// export const runtime = 'edge';
+export const runtime = 'edge';
 export async function generateMetadata({
   params
 }: {
@@ -87,8 +87,8 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <div className="align-left w-full justify-start ">
-        <div className="relative flex flex-col rounded-none bg-white dark:border-neutral-800 dark:bg-black md:p-8 md:px-0 md:py-0 lg:flex-row lg:gap-0">
+      <div className="justify-start w-full align-left ">
+        <div className="relative flex flex-col bg-white rounded-none dark:border-neutral-800 dark:bg-black md:p-8 md:px-0 md:py-0 lg:flex-row lg:gap-0">
           <div className="w-full basis-full lg:basis-3/6">
             <Gallery
               images={productImages.map((image: Image) => ({
@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: { params: { handle: string
             />
           </div>
 
-          <div className="sticky top-0 h-fit basis-full px-4 py-8 md:px-8 md:py-10 lg:basis-3/6">
+          <div className="sticky top-0 px-4 py-8 h-fit basis-full md:px-8 md:py-10 lg:basis-3/6">
             <ProductDescription product={product} />
             <PortableText
               blocks={productData.body}
@@ -126,13 +126,13 @@ async function RelatedProducts({ id }: { id: string }) {
   return (
     <div className="py-8">
       <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-      <ul className="md: flex h-full w-full gap-4 overflow-x-auto py-20 pt-1 md:py-12">
+      <ul className="flex w-full h-full gap-4 py-20 pt-1 overflow-x-auto md: md:py-12">
         {relatedProducts.map((product) => (
           <li
             key={product.handle}
             className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
           >
-            <Link className="relative h-full w-full" href={`/product/${product.handle}`}>
+            <Link className="relative w-full h-full" href={`/product/${product.handle}`}>
               <GridTileImage
                 alt={product.title}
                 label={{
