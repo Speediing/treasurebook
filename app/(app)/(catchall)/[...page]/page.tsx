@@ -9,7 +9,7 @@ export async function generateMetadata({}: { params: { page: string } }): Promis
     description: ''
   };
 }
-// export const runtime = 'edge';
+export const runtime = 'edge';
 export default async function Page({ params }: { params: { page: string } }) {
   return (
     <div className="min-h-screen bg-white">
