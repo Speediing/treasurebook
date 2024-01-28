@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { AddToCart } from 'components/cart/add-to-cart';
-import Price from 'components/price';
+import { SelectedPrice } from 'components/price';
 import { Product } from 'lib/shopify/types';
 import { VariantSelector } from './variant-selector';
 export function ProductDescription({ product }: { product: Product }) {
@@ -9,7 +9,7 @@ export function ProductDescription({ product }: { product: Product }) {
       <div className="max-w-lg mx-auto ml-0 md:px-0">
         <h1 className="mb-1 text-xl font-bold md:text-2xl">{product.title}</h1>
 
-        <Price variants={product.variants} />
+        <SelectedPrice variants={product.variants} />
         <div className="flex items-center justify-between py-4 mt-4 border-b md:mt-8">
           <span className="text-lg font-medium">Quantity</span>
           <div className="flex items-center">

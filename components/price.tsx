@@ -28,8 +28,28 @@ function objectsMatch(obj1, obj2) {
   // If the criteria match, return true; otherwise, return false
   return obj1.name === obj2.name && obj1.value === obj2.value;
 }
-
 const Price = ({
+  amount,
+  className,
+  currencyCode = 'USD',
+  currencyCodeClassName
+}: {
+  amount: string;
+  className?: string;
+  currencyCode: string;
+  currencyCodeClassName?: string;
+} & React.ComponentProps<'p'>) => (
+  <p suppressHydrationWarning={true} className={className}>
+    {`${new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: currencyCode,
+      currencyDisplay: 'narrowSymbol'
+    }).format(parseFloat(amount))}`}
+    <span className={clsx('ml-1 inline', currencyCodeClassName)}>{`${currencyCode}`}</span>
+  </p>
+);
+
+export const SelectedPrice = ({
   variants,
   className,
   currencyCodeClassName
