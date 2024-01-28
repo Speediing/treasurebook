@@ -1,26 +1,28 @@
 import { getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 // import { refreshToken } from 'auth/shopify';
 
 // This function can be marked `async` if using `await` inside
-export async function middleware() {
-  const session = await getNewPageSession();
+export async function middleware(request: NextRequest) {
+  const response = NextResponse.next({ request });
+  const session = await getNewPageSession(request, response);
 }
 
-const getNewPageSession = async () => {
-  const session: any = await getIronSession(cookies(), {
+const getNewPageSession = async (req, res) => {
+  let session: any = await getIronSession(req, res, {
     password: process.env.SESSION_KEY || '',
     cookieName: 'shopSession'
   });
-
   if (session?.expires_at < new Date().getTime()) {
     console.log('expired');
     try {
-      await refreshToken(session);
+      session = await refreshToken(session);
     } catch (error) {
       console.log(error);
     }
   }
+  console.log(session);
   return session;
 };
 
@@ -67,7 +69,8 @@ export async function refreshToken(session: any) {
     session.id_token = id_token;
     session.refresh_token = refresh_token;
     session.accessToken = customerAccessToken;
-    session.save();
+    console.log('we out here');
+    await session.save();
   } catch (e) {
     console.log(e);
     // if (e instanceof LuciaError && e.message === `AUTH_INVALID_SESSION_ID`) {
