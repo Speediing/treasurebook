@@ -47,9 +47,9 @@ export function GridTileImage({
         ) : null} */}
       </div>
       {label ? (
-        <div className="flex h-20 flex-col justify-start pt-2 md:h-auto md:flex-row md:justify-between md:pt-0">
+        <div className="flex flex-col justify-start h-20 pt-2 md:h-auto md:flex-row md:justify-between md:pt-0">
           <div className="flex flex-col justify-center">
-            <h3 className="l-2 f mr-4 line-clamp-2 py-2 align-middle leading-none tracking-tight ">
+            <h3 className="py-2 mr-4 leading-none tracking-tight align-middle l-2 f line-clamp-2 ">
               {label.title}
             </h3>
           </div>
@@ -57,7 +57,7 @@ export function GridTileImage({
             suppressHydrationWarning={true}
             className={'flex-none text-sm font-light  text-black md:py-2'}
           >
-            {`${new Intl.NumberFormat(undefined, {
+            {` ${new Intl.NumberFormat(undefined, {
               style: 'currency',
               currency: label?.currencyCode || '',
               currencyDisplay: 'narrowSymbol'

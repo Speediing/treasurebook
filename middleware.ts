@@ -12,7 +12,7 @@ const getNewPageSession = async () => {
     password: process.env.SESSION_KEY || '',
     cookieName: 'shopSession'
   });
-  console.log(session);
+
   if (session?.expires_at < new Date().getTime()) {
     console.log('expired');
     try {
