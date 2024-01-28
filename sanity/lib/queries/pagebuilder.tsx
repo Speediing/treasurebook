@@ -31,6 +31,6 @@ export const getPageBuilder = async (slug: string) => {
   );
 
   const pageContent = content[0].pageBuilder;
-  console.log(pageContent);
+
   return pageContent;
 };

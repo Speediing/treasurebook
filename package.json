@@ -15,7 +15,7 @@
     "test": "pnpm lint && pnpm prettier:check"
   },
   "git": {
-   
+
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
