@@ -66,7 +66,7 @@ export async function refreshToken(session: any) {
   try {
     session.customer_authorization_code_token = access_token;
     session.expires_at = new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime();
-    session.id_token = id_token;
+    // session.id_token = id_token;
     session.refresh_token = refresh_token;
     session.accessToken = customerAccessToken;
     console.log('we out here');
