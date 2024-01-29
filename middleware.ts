@@ -1,14 +1,15 @@
 import { getIronSession, sealData } from 'iron-session';
-import { cookies } from 'next/headers';
-import type { NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  await getNewPageSession();
+  const response = NextResponse.next({ request });
+  await getNewPageSession(request, response);
+  return response;
 }
 
-const getNewPageSession = async () => {
-  let session: any = await getIronSession(cookies(), {
+const getNewPageSession = async (req, res) => {
+  let session: any = await getIronSession(req, res, {
     password: process.env.SESSION_KEY || '',
     cookieName: 'shopSession'
   });
@@ -22,11 +23,13 @@ const getNewPageSession = async () => {
         },
         { password: process.env.SESSION_KEY || '' }
       );
-      cookies().set('shopSession', sealed);
+      req.cookies.set('shopSession', sealed);
+      res.cookies.set('shopSession', sealed);
     } catch (error) {
       console.log(error);
     }
   }
+  console.log(session);
   return session;
 };
 
@@ -83,6 +86,7 @@ export async function refreshToken(session: any) {
     // provided session attributes violates database rules (e.g. unique constraint)
     // or unexpected database errors
   }
+
   return session;
 }
 
