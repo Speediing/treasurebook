@@ -11,6 +11,7 @@ export const PRODUCT_PAGE = groq`
   body[]{
     ${PORTABLE_TEXT}
   },
+  tabsArray,
   colorTheme->{
     ${COLOR_THEME}
   },

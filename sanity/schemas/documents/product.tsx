@@ -79,6 +79,13 @@ export default defineType({
       group: 'editorial'
     }),
     defineField({
+      title: 'Description Tabs',
+      name: 'tabsArray',
+      type: 'array',
+      group: 'editorial',
+      of: [{ type: 'product.descriptionTab' }]
+    }),
+    defineField({
       name: 'store',
       title: 'Shopify',
       type: 'shopifyProduct',
