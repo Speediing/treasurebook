@@ -33,11 +33,11 @@ export function ProductDescription({
           defaultValue={productData.tabsArray[0].title}
           className="flex  flex-col gap-3 text-xs md:flex-row md:gap-[100px]"
         >
-          <TabsList className="flex flex-row justify-start gap-4 text-xs mmin-w-32 overflow-x-aut h-fit whitespace-nowrap md:flex-col md:gap-0">
+          <TabsList className="flex flex-row justify-between gap-4 overflow-x-auto text-xs h-fit min-w-32 whitespace-nowrap md:flex-col md:justify-start md:gap-0">
             {productData.tabsArray.map((tab) => {
               return (
                 <TabsTrigger
-                  className="h-fit  w-full justify-start text-left text-xs font-bold text-neutral-500 data-[state=active]:text-black"
+                  className="h-fit  w-full text-center text-xs font-bold text-neutral-500 data-[state=active]:text-black md:justify-start md:text-left"
                   value={tab.title}
                 >
                   {tab.title}
