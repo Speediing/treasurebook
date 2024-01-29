@@ -1,12 +1,21 @@
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import clsx from 'clsx';
 import { AddToCart } from 'components/cart/add-to-cart';
+import PortableText from 'components/portableText/PortableText';
 import { SelectedPrice } from 'components/price';
 import { Product } from 'lib/shopify/types';
 import { VariantSelector } from './variant-selector';
-export function ProductDescription({ product }: { product: Product }) {
+export function ProductDescription({
+  product,
+  productData
+}: {
+  product: Product;
+  productData: any;
+}) {
   return (
-    <>
-      <div className="max-w-lg mx-auto ml-0 md:px-0">
+    <div className="flex flex-row justify-center">
+      <div className="w-full max-w-lg md:px-0">
         <h1 className="mb-1 text-xl font-bold md:text-2xl">{product.title}</h1>
 
         <SelectedPrice variants={product.variants} />
@@ -20,6 +29,37 @@ export function ProductDescription({ product }: { product: Product }) {
         </div>
         <VariantSelector options={product.options} variants={product.variants} />
         <AddToCart variants={product.variants} availableForSale={product.availableForSale} />
+        <Tabs
+          defaultValue={productData.tabsArray[0].title}
+          className="flex  flex-col gap-3 text-xs md:flex-row md:gap-[100px]"
+        >
+          <TabsList className="flex flex-row justify-start gap-4 text-xs mmin-w-32 overflow-x-aut h-fit whitespace-nowrap md:flex-col md:gap-0">
+            {productData.tabsArray.map((tab) => {
+              return (
+                <TabsTrigger
+                  className="h-fit  w-full justify-start text-left text-xs font-bold text-neutral-500 data-[state=active]:text-black"
+                  value={tab.title}
+                >
+                  {tab.title}
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+          {productData.tabsArray.map((tab) => {
+            return (
+              <TabsContent value={tab.title}>
+                <PortableText
+                  blocks={tab.body}
+                  centered
+                  className={clsx(
+                    ' max-w-[660px] ', //
+                    ''
+                  )}
+                />
+              </TabsContent>
+            );
+          })}
+        </Tabs>
       </div>
 
       {/* <div className="flex flex-col pb-6 mb-6 border-b dark:border-neutral-700">
@@ -40,6 +80,6 @@ export function ProductDescription({ product }: { product: Product }) {
       ) : null} */}
 
       {/* <AddToCart variants={product.variants} availableForSale={product.availableForSale} /> */}
-    </>
+    </div>
   );
 }
