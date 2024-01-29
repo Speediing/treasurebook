@@ -73,12 +73,6 @@ export default defineType({
       group: 'editorial'
     }),
     defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'body',
-      group: 'editorial'
-    }),
-    defineField({
       title: 'Description Tabs',
       name: 'tabsArray',
       type: 'array',
