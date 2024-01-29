@@ -1,3 +1,4 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -100,14 +101,45 @@ export default async function ProductPage({ params }: { params: { handle: string
 
           <div className="sticky top-0 px-4 py-8 h-fit basis-full md:px-8 md:py-10 lg:basis-3/6">
             <ProductDescription product={product} />
-            <PortableText
+            {/* <PortableText
               blocks={productData.body}
               centered
               className={clsx(
                 ' max-w-[660px] ', //
                 ''
               )}
-            />
+            /> */}
+            <Tabs
+              defaultValue={productData.tabsArray[0].title}
+              className="flex h-full flex-col gap-3 text-xs md:flex-row md:gap-[100px]"
+            >
+              <TabsList className="flex flex-row justify-start h-full gap-4 overflow-x-auto text-xs min-w-32 whitespace-nowrap md:flex-col md:gap-0">
+                {productData.tabsArray.map((tab) => {
+                  return (
+                    <TabsTrigger
+                      className="w-full justify-start text-left text-xs font-bold text-neutral-500 data-[state=active]:text-black"
+                      value={tab.title}
+                    >
+                      {tab.title}
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
+              {productData.tabsArray.map((tab) => {
+                return (
+                  <TabsContent value={tab.title}>
+                    <PortableText
+                      blocks={tab.body}
+                      centered
+                      className={clsx(
+                        ' max-w-[660px] ', //
+                        ''
+                      )}
+                    />
+                  </TabsContent>
+                );
+              })}
+            </Tabs>
           </div>
         </div>
         <Suspense>

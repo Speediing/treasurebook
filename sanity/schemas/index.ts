@@ -86,6 +86,13 @@ import fullWidthImage from './objects/fullWidthImage';
 import splitSmallText from './objects/splitSmallText';
 import videoBlog from './objects/video';
 
+// Product
+
+import descriptionTabBody from './objects/product/descriptionTabBody';
+import descriptionTabs from './objects/product/descriptionTabs';
+
+const productOptions = [descriptionTabs, descriptionTabBody];
+
 const objects = [
   customProductOptionColor,
   customProductOptionColorObject,
@@ -140,4 +147,11 @@ const objects = [
   videoBlog
 ];
 
-export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents];
+export const schemaTypes = [
+  ...annotations,
+  ...singletons,
+  ...objects,
+  ...blocks,
+  ...documents,
+  ...productOptions
+];
