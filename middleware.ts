@@ -6,7 +6,8 @@ import { NextResponse } from 'next/server';
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next({ request });
-  const session = await getNewPageSession(request, response);
+  await getNewPageSession(request, response);
+  return response;
 }
 
 const getNewPageSession = async (req, res) => {
