@@ -113,11 +113,11 @@ export default async function ProductPage({ params }: { params: { handle: string
               defaultValue={productData.tabsArray[0].title}
               className="flex h-full flex-col gap-3 text-xs md:flex-row md:gap-[100px]"
             >
-              <TabsList className="flex flex-row h-full gap-2 text-xs min-w-32 md:flex-col md:gap-0">
+              <TabsList className="flex flex-row justify-start h-full gap-4 overflow-x-auto text-xs min-w-32 whitespace-nowrap md:flex-col md:gap-0">
                 {productData.tabsArray.map((tab) => {
                   return (
                     <TabsTrigger
-                      className="justify-start w-full text-xs text-left"
+                      className="w-full justify-start text-left text-xs font-bold text-neutral-500 data-[state=active]:text-black"
                       value={tab.title}
                     >
                       {tab.title}
