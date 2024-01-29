@@ -1,16 +1,14 @@
-import { getIronSession } from 'iron-session';
+import { getIronSession, sealData } from 'iron-session';
+import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
-// import { refreshToken } from 'auth/shopify';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request });
-  const session = await getNewPageSession(request, response);
+  await getNewPageSession();
 }
 
-const getNewPageSession = async (req, res) => {
-  let session: any = await getIronSession(req, res, {
+const getNewPageSession = async () => {
+  let session: any = await getIronSession(cookies(), {
     password: process.env.SESSION_KEY || '',
     cookieName: 'shopSession'
   });
@@ -18,11 +16,17 @@ const getNewPageSession = async (req, res) => {
     console.log('expired');
     try {
       session = await refreshToken(session);
+      const sealed = await sealData(
+        {
+          ...session
+        },
+        { password: process.env.SESSION_KEY || '' }
+      );
+      cookies().set('shopSession', sealed);
     } catch (error) {
       console.log(error);
     }
   }
-  console.log(session);
   return session;
 };
 
@@ -70,7 +74,7 @@ export async function refreshToken(session: any) {
     session.refresh_token = refresh_token;
     session.accessToken = customerAccessToken;
     console.log('we out here');
-    await session.save();
+    // await session.save();
   } catch (e) {
     console.log(e);
     // if (e instanceof LuciaError && e.message === `AUTH_INVALID_SESSION_ID`) {
