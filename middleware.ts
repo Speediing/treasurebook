@@ -3,13 +3,13 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request });
-  await getNewPageSession(request, response);
+  const response = await refreshSession(request);
   return response;
 }
 
-const getNewPageSession = async (req, res) => {
-  let session: any = await getIronSession(req, res, {
+async function refreshSession(request: NextRequest) {
+  let response = NextResponse.next({ request });
+  let session: any = await getIronSession(request, response, {
     password: process.env.SESSION_KEY || '',
     cookieName: 'shopSession'
   });
@@ -23,15 +23,14 @@ const getNewPageSession = async (req, res) => {
         },
         { password: process.env.SESSION_KEY || '' }
       );
-      req.cookies.set('shopSession', sealed);
-      res.cookies.set('shopSession', sealed);
+      request.cookies.set('shopSession', sealed);
+      response = NextResponse.next({ request });
     } catch (error) {
       console.log(error);
     }
   }
-  console.log(session);
-  return session;
-};
+  return response;
+}
 
 export async function refreshToken(session: any) {
   const clientId = process.env.SHOPIFY_CLIENT_ID || '';
@@ -72,6 +71,7 @@ export async function refreshToken(session: any) {
 
   try {
     session.customer_authorization_code_token = access_token;
+
     session.expires_at = new Date(new Date().getTime() + (expires_in - 120) * 1000).getTime();
     // session.id_token = id_token;
     session.refresh_token = refresh_token;
