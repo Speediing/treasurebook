@@ -10,6 +10,17 @@ terraform {
     }
   }
 }
+
+provider "vercel" {
+  # Optional default team for all resources
+  team = "team_zfgWnJXv2XUd0rTW2okTYvSZ"
+}
+
+provider "aws" {
+  region = "us-west-2"
+}
+
+
 module "proejctOne" {
   source  = "./VercelProject"
  
