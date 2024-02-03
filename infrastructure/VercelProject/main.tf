@@ -8,12 +8,8 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_secretsmanager_secret" "example" {
-  name = "example"
-}
-
 data "aws_secretsmanager_secret_version" "example" {
-  secret_id = aws_secretsmanager_secret.example.id
+  secret_id = "database"
 }
 
 resource "vercel_project" "example" {

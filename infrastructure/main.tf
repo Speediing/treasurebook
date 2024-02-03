@@ -21,7 +21,11 @@ provider "aws" {
 }
 
 
+
+resource "aws_secretsmanager_secret" "example" {
+  name = "database"
+}
+
 module "proejctOne" {
   source  = "./VercelProject"
- 
 }
