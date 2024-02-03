@@ -9,7 +9,8 @@ provider "aws" {
 }
 
 data "aws_secretsmanager_secret_version" "example" {
-  secret_id = "database"
+  for_each   = var.environemntVariables
+  secret_id = key.value
 }
 
 resource "vercel_project" "example" {
@@ -20,8 +21,9 @@ resource "vercel_project" "example" {
 # An environment variable that will be created
 # for this project for the "production" environment.
 resource "vercel_project_environment_variable" "example2" {
+  for_each   = data.aws_secretsmanager_secret_version
   project_id = vercel_project.example.id
   key        = "foo"
-  value      =  data.aws_secretsmanager_secret_version.example.secret_string
+  value      =  for_each.value.example.secret_string
   target     = ["production"]
 }

@@ -28,4 +28,5 @@ resource "aws_secretsmanager_secret" "example" {
 
 module "proejctOne" {
   source  = "./VercelProject"
+  environemntVariables = [aws_secretsmanager_secret.example.id]
 }
