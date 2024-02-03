@@ -10,7 +10,6 @@ terraform {
     }
   }
 }
-
 provider "vercel" {
   # Optional default team for all resources
   team = "team_zfgWnJXv2XUd0rTW2okTYvSZ"
@@ -21,12 +20,3 @@ provider "aws" {
 }
 
 
-
-resource "aws_secretsmanager_secret" "example" {
-  name = "database"
-}
-
-module "proejctOne" {
-  source  = "./VercelProject"
-  environemntVariables = [aws_secretsmanager_secret.example.id]
-}
