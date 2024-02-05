@@ -11,7 +11,6 @@ terraform {
   }
 }
 provider "vercel" {
-  # Optional default team for all resources
   team = "team_zfgWnJXv2XUd0rTW2okTYvSZ"
 }
 
