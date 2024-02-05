@@ -20,3 +20,10 @@ provider "aws" {
 }
 
 
+module "TeamA" {
+  source = "./team-A"
+}
+
+module "TeamB" {
+  source = "./team-B"
+}
