@@ -1,5 +1,5 @@
 data "aws_secretsmanager_secret_version" "example" {
-  secret_id = aws_secretsmanager_secret.team_secret_2.id
+  secret_id = aws_secretsmanager_secret.team_secret.id
 }
 
 resource "vercel_project_environment_variable" "example" {
