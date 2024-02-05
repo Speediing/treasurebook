@@ -21,9 +21,9 @@ provider "aws" {
 
 
 module "TeamA" {
-  source = "./team-A"
+  source = "./team-a"
 }
 
 module "TeamB" {
-  source = "./team-B"
+  source = "./team-b"
 }
