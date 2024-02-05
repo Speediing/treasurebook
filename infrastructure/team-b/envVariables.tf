@@ -1,10 +1,5 @@
-resource "aws_secretsmanager_secret" "teamSecret2" {
-  name = "teamSecret2"
-}
-
-
 data "aws_secretsmanager_secret_version" "example" {
-  secret_id = aws_secretsmanager_secret.teamSecret2.id
+  secret_id = aws_secretsmanager_secret.team_secret_2.id
 }
 
 resource "vercel_project_environment_variable" "example" {
