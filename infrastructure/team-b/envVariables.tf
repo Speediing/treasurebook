@@ -1,3 +1,8 @@
+resource "aws_secretsmanager_secret" "teamSecret2" {
+  name = "teamSecret2"
+}
+
+
 data "aws_secretsmanager_secret_version" "example" {
   secret_id = aws_secretsmanager_secret.teamSecret2.id
 }
