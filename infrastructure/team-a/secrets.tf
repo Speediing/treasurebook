@@ -1,3 +1,3 @@
-resource "aws_secretsmanager_secret" "sampleSecret" {
-  name = "sampleSecret"
+resource "aws_secretsmanager_secret" "teamSecret" {
+  name = "teamSecret"
 }
