@@ -1,3 +1,3 @@
 resource "aws_secretsmanager_secret" "team_secret" {
-  name = "teamSecret2"
+  name = "team_secret2"
 }
