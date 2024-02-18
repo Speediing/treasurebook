@@ -4,7 +4,7 @@ import MuxPlayer from '@mux/mux-player-react';
 import Link from 'next/link';
 
 export const VideoHero = ({ module }: { module: any }) => {
-  console.log(module.playbackId);
+  console.log(module.playbackId.substring(0, 47));
 
   return (
     <div className="relative flex h-[calc(100svh-76px)] min-h-full w-full flex-col justify-center align-middle text-white md:h-[calc(100vh-91px)]">
@@ -16,9 +16,9 @@ export const VideoHero = ({ module }: { module: any }) => {
         loop={true}
         className="--media [--media-object-fit: contain] absolute h-full object-contain"
         streamType="on-demand"
-        playbackId={module.playbackId.trim()}
+        playbackId={module.playbackId.substring(0, 47)}
         metadata={{
-          video_id: module.playbackId.trim(),
+          video_id: module.playbackId.substring(0, 47),
           video_title: 'Test video title',
           viewer_user_id: 'user-id-007'
         }}
