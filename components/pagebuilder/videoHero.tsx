@@ -16,9 +16,9 @@ export const VideoHero = ({ module }: { module: any }) => {
         loop={true}
         className="--media [--media-object-fit: contain] absolute h-full object-contain"
         streamType="on-demand"
-        playbackId={module.playbackId}
+        playbackId={module.playbackId.trim()}
         metadata={{
-          video_id: module.playbackId,
+          video_id: module.playbackId.trim(),
           video_title: 'Test video title',
           viewer_user_id: 'user-id-007'
         }}
