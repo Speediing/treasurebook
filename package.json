@@ -14,9 +14,7 @@
     "prettier:check": "prettier --check --ignore-unknown .",
     "test": "pnpm lint && pnpm prettier:check"
   },
-  "git": {
-
-  },
+  "git": {},
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
   },
@@ -34,9 +32,10 @@
     "@sanity/color-input": "^3.0.2",
     "@sanity/icons": "^2.3.1",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/react-loader": "^1.8.5",
     "@sanity/types": "^3.14.1",
     "@sanity/ui": "^1.3.2",
-    "@sanity/vision": "3",
+    "@sanity/vision": "^3",
     "@vercel/analytics": "^1.1.1",
     "@vercel/kv": "^1.0.1",
     "@vercel/otel": "^1.0.0",
@@ -50,11 +49,11 @@
     "iron-session": "^8.0.1",
     "lodash.get": "^4.4.2",
     "next": "canary",
-    "next-sanity": "5",
+    "next-sanity": "^7.1.4",
     "pluralize-esm": "^9.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sanity": "3",
+    "sanity": "^3.28.0",
     "sanity-plugin-hotspot-array": "^1.0.1",
     "sanity-plugin-media": "^2.0.5",
     "sanity-plugin-mux-input": "^2.2.4",
@@ -68,8 +67,8 @@
     "@tailwindcss/typography": "^0.5.9",
     "@types/lodash.get": "^4.4.7",
     "@types/node": "20.4.4",
-    "@types/react": "18.2.16",
-    "@types/react-dom": "18.2.7",
+    "@types/react": "^18.2.16",
+    "@types/react-dom": "^18.2.16",
     "@types/styled-components": "^5.1.26",
     "@vercel/git-hooks": "^1.0.0",
     "autoprefixer": "^10.4.14",

@@ -6,7 +6,8 @@ module.exports = {
   },
   experimental: {
     // ppr: true,
-    instrumentationHook: true
+    instrumentationHook: true,
+    taint: true,
   },
   logging: {
     fetches: {

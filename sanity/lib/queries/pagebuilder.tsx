@@ -1,8 +1,9 @@
 import { groq } from 'next-sanity';
 import { client } from '../client';
+import { loadQuery } from '../store';
 
 export const getPageBuilder = async (slug: string) => {
-  const content = await client.fetch(
+  const { data }: any = await loadQuery(
     groq`
     *[_type == "page" && slug.current == "${slug}"]{
     pageBuilder[]{
@@ -30,7 +31,7 @@ export const getPageBuilder = async (slug: string) => {
     { cache: 'force-cache', next: { tags: [`page-${slug}`] } }
   );
 
-  const pageContent = content[0].pageBuilder;
+  const pageContent = data[0].pageBuilder;
 
   return pageContent;
 };
