@@ -4,10 +4,13 @@ import MuxPlayer from '@mux/mux-player-react';
 import Link from 'next/link';
 
 export const VideoHero = ({ module }: { module: any }) => {
-  console.log(module);
+  console.log(module.playbackId);
 
   return (
     <div className="relative flex h-[calc(100svh-76px)] min-h-full w-full flex-col justify-center align-middle text-white md:h-[calc(100vh-91px)]">
+      {/* <video autoPlay controls width="250" className="--media [--media-object-fit: contain] absolute h-full object-contain">
+        <source type="application/x-mpegURL" src="https://stream.mux.com/02taEpmDfskQr02186QHyvztcOgTOyReygB57c1xY0001FU.m3u8" />
+      </video> */}
       <MuxPlayer
         autoPlay={'muted'}
         loop={true}
