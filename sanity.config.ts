@@ -28,6 +28,7 @@ import { defineConfig, isDev } from 'sanity';
 import { presentationTool } from 'sanity/presentation'
 import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
+import { locate } from './sanity/presentation/locate'
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array';
 import { media, mediaAssetSource } from 'sanity-plugin-media';
 import { muxInput } from 'sanity-plugin-mux-input';
@@ -54,6 +55,7 @@ export default defineConfig({
     customDocumentActions(),
     media(),
     presentationTool({
+      locate,
       previewUrl: {
         draftMode: {
           enable: '/api/draft',
