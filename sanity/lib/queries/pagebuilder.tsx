@@ -1,6 +1,7 @@
 import { groq } from 'next-sanity';
 import { client } from '../client';
 import { loadQuery } from '../store';
+import { draftMode } from 'next/headers';
 
 export const getPageBuilder = async (slug: string) => {
   const { data }: any = await loadQuery(
@@ -28,7 +29,7 @@ export const getPageBuilder = async (slug: string) => {
     }
   }`,
     {},
-    { cache: 'force-cache', next: { tags: [`page-${slug}`] } }
+    { cache: 'force-cache', next: { tags: [`page-${slug}`] }, perspective: draftMode().isEnabled ? "previewDrafts" : "published", }
   );
 
   const pageContent = data[0].pageBuilder;
