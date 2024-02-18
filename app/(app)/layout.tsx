@@ -6,6 +6,8 @@ import { ensureStartsWith } from 'lib/utils';
 import { Inter } from 'next/font/google';
 import { ReactNode, Suspense } from 'react';
 import '../globals.css';
+import LiveVisualEditing from 'components/LiveVisualEditing';
+import { draftMode } from 'next/headers';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -26,12 +28,12 @@ export const metadata = {
   },
   ...(twitterCreator &&
     twitterSite && {
-      twitter: {
-        card: 'summary_large_image',
-        creator: twitterCreator,
-        site: twitterSite
-      }
-    })
+    twitter: {
+      card: 'summary_large_image',
+      creator: twitterCreator,
+      site: twitterSite
+    }
+  })
 };
 
 const inter = Inter({
@@ -48,6 +50,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Suspense>
           <main>{children}</main>
         </Suspense>
+        {draftMode().isEnabled && <LiveVisualEditing />}
         <Analytics />
         <SpeedInsights />
         <Footer />

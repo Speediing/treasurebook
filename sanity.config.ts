@@ -25,7 +25,7 @@
 // });
 
 import { defineConfig, isDev } from 'sanity';
-
+import { presentationTool } from 'sanity/presentation'
 import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array';
@@ -53,6 +53,13 @@ export default defineConfig({
     imageHotspotArrayPlugin(),
     customDocumentActions(),
     media(),
+    presentationTool({
+      previewUrl: {
+        draftMode: {
+          enable: '/api/draft',
+        },
+      },
+    }),
     ...(isDev ? devOnlyPlugins : [])
   ],
 
